@@ -4,12 +4,12 @@ import '../commons.dart';
 import '../screens/product_details/widgets/widgets.dart';
 
 class UserDetails extends StatefulWidget {
-  var data;
-
-  UserDetails({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
+  // var data;
+  //
+  // UserDetails({
+  //   Key? key,
+  //   required this.data,
+  // }) : super(key: key);
 
 
   @override
