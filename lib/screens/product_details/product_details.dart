@@ -1,4 +1,5 @@
 import 'package:DaSell/commons.dart';
+import 'package:DaSell/lucie/userDetails.dart';
 import 'package:DaSell/services/firebase/models/product_vo.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
@@ -236,22 +237,33 @@ class _ProductDetailsState extends ProductDetailsState {
                           if (hasAdUser)
                             ProductUserAvatar(imageUrl: adUser?.profilePicture),
                           Gap(25),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Producto publicado por ',
-                                style:
-                                    TextStyle(fontSize: 15, fontFamily: 'Poppins'),
-                              ),
-                              if (!hasAdUser) CommonProgress(),
-                              if (hasAdUser)
-                                Text(
-                                  textAdUserName,
-                                  style: TextStyle(
-                                      fontSize: 18, fontFamily: 'Poppins'),
-                                ),
-                            ],
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => UserDetails(),
+                              ));
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (!hasAdUser) CommonProgress(),
+                                if (hasAdUser)
+                                  Text(
+                                    textAdUserName,
+                                    style: TextStyle(
+                                        fontSize: 18, fontFamily: 'Poppins'),
+                                  ),
+                                Row(children: [
+                                  Icon(Icons.star,size: 15,),
+                                  Icon(Icons.star,size: 15,),
+                                  Icon(Icons.star,size: 15,),
+                                  Icon(Icons.star,size: 15,),
+                                  Icon(Icons.star,size: 15,),
+                                  Text("(2)",style: TextStyle(fontSize: 10),)
+                                ],)
+
+                              ],
+                            ),
                           )
                         ],
                       ),
