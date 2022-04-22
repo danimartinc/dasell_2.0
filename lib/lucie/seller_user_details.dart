@@ -88,7 +88,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState with SingleTickerPr
               child: TabBarView(
                 controller: _controller,
                 children: <Widget>[
-                  AdsBySeller(),
+                  adUser != null ? AdsBySeller(uid: adUser?.uid,):Container(),
                   //Container(color: Colors.green,),
                   Container(color: Colors.red,)
                 ],

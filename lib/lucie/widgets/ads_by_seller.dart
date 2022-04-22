@@ -8,6 +8,13 @@ import '../../services/firebase/models/product_vo.dart';
 
 
 class AdsBySeller extends StatefulWidget {
+
+  var uid;
+
+  AdsBySeller({
+    Key? key,
+    required this.uid,
+  }) : super(key: key);
   
   @override
   createState() => _MyAdsState();
@@ -15,7 +22,7 @@ class AdsBySeller extends StatefulWidget {
 
 class _MyAdsState extends AdsBySellerScreenState {
 
-  final uid = FirebaseAuth.instance.currentUser!.uid;
+  //final uid = FirebaseAuth.instance.currentUser!.uid;
   bool isLoading = false;
 
   @override
@@ -27,7 +34,7 @@ class _MyAdsState extends AdsBySellerScreenState {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: FirebaseFirestore.instance
           .collection('products')
-          .where('uid', isEqualTo: uid)
+          .where('uid', isEqualTo: widget.uid)
           .snapshots(),
       builder: ( context, snapshot ) {
 
