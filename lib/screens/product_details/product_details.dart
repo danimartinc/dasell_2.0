@@ -1,8 +1,10 @@
 import 'package:DaSell/commons.dart';
+import 'package:DaSell/lucie/editPost.dart';
 import 'package:DaSell/lucie/seller_user_details.dart';
 import 'package:DaSell/services/firebase/models/product_vo.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'product_details_state.dart';
 import 'widgets/action_button.dart';
@@ -253,14 +255,21 @@ class _ProductDetailsState extends ProductDetailsState {
                                     style: TextStyle(
                                         fontSize: 18, fontFamily: 'Poppins'),
                                   ),
-                                Row(children: [
-                                  Icon(Icons.star,size: 15,),
-                                  Icon(Icons.star,size: 15,),
-                                  Icon(Icons.star,size: 15,),
-                                  Icon(Icons.star,size: 15,),
-                                  Icon(Icons.star,size: 15,),
-                                  Text("(2)",style: TextStyle(fontSize: 10),)
-                                ],)
+                                Row(
+                                  children: [
+                                    RatingBarIndicator(
+                                      itemSize: 14,
+                                      rating: adUser?.averageReview ?? 0.0,
+                                      direction: Axis.horizontal,
+                                      itemCount: 5,
+                                      itemBuilder: (context, _) => Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                    ),
+                                    Text("(" + adUser!.reviews.length.toString() + ")")
+                                  ],
+                                ),
 
                               ],
                             ),
@@ -338,9 +347,14 @@ PreferredSizeWidget? _customAppBar() {
       elevation: 0.0,
       leading: BackButton(color: color ),
       backgroundColor: Colors.indigo.shade800.withOpacity((scrollOffset / 230).clamp(0, 1).toDouble()),
-      actions: [          
+      actions: [
+        if(data.isMe)
+        InkWell(onTap: (){
+          Navigator.push(context,MaterialPageRoute(builder: (builder)=>EditPost(data: data)));
+        },child: Icon(Icons.edit)),
         if(data.isMe)
         ActionButtonMoreOptions(onDelete: onDeleteTap, onSell: onSellTap, iconColor: color,),
+
       ],
     ),      
   );    

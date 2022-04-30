@@ -118,7 +118,9 @@ class ResponseProductVo {
     location = json['location'] != null
         ? new $Location.fromJson(json['location'])
         : null;
-    categories = json['categories'].cast<String>();
+    categories = (json['categories'] as List<dynamic>)
+        .map((e) => e as String)
+        .toList();
     makeShipments = json['makeShipments'];
     tag = json['tag'];
   }

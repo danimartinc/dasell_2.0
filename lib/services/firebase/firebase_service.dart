@@ -5,6 +5,7 @@ import 'package:DaSell/screens/tabs/chat/models.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../../lucie/PostModel.dart';
 import 'models/product_vo.dart';
 
 class FirebaseService {
@@ -67,6 +68,7 @@ class FirebaseService {
     });
   }
 
+
   //// get products.
   Future<List<ResponseProductVo>?> getProducts({bool descending = true}) async {
     final res = await firestore
@@ -95,6 +97,16 @@ class FirebaseService {
   Future<UserVo> getUser(String userId) async {
     final userData = await firestore.collection('users').doc(userId).get();
     return UserVo.fromJson(userData.data());
+  }
+
+  Future<PostModel> getPostData(String postId) async {
+    final postData = await firestore.collection('products').doc(postId).get();
+    return PostModel.fromJson(postData.data()!);
+  }
+
+  Future<bool> updatePostData(String postId, Map<String, dynamic> data) async {
+    final pos = await firestore.collection('products').doc(postId).update(data);
+    return true;
   }
 
   StreamSubscription subscribeToChats(QueryStreamDataCallback onData) {

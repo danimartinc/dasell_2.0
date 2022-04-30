@@ -17,6 +17,8 @@
 
 class UserVo {
   String? _uid, _profilePicture, _name, _email, _token, _status;
+  List<Review>? _reviews;
+  double? _averageReview;
 
   UserVo({
     String? uid,
@@ -25,6 +27,9 @@ class UserVo {
     String? email,
     String? token,
     String? status,
+    List<Review>? reviews,
+    double? averageReview
+
   }) {
     this._uid = uid;
     this._profilePicture = profilePicture;
@@ -32,6 +37,8 @@ class UserVo {
     this._email = email;
     this._token = token;
     this._status = status;
+    this._reviews = reviews;
+    this._averageReview = averageReview! + 0.0;
   }
 
   String get uid => _uid!;
@@ -50,6 +57,10 @@ class UserVo {
 
   String get textName => name ?? '-';
 
+  double? get averageReview => _averageReview! + 0.0;
+
+  List<Review> get reviews => _reviews ?? [];
+
   @override
   String toString() {
     return 'UserVo2{_uid: $_uid, _profilePicture: $_profilePicture, _name: $_name, _email: $_email, _token: $_token, _status: $_status}';
@@ -62,6 +73,8 @@ class UserVo {
     _email = json['email'];
     _token = json['token'];
     _status = json['status'];
+    _reviews = List<Review>.from(json["reviews"].map((x) => Review.fromJson(x)));
+    _averageReview = json['averageReview'] + 0.0;
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +85,38 @@ class UserVo {
     data['email'] = this._email;
     data['token'] = this._token;
     data['status'] = this._status;
+    data['reviews'] = List<dynamic>.from(reviews.map((x) => x.toJson()));
+    data['averageReview'] = this._averageReview;
     return data;
   }
+
+
+}
+
+class Review {
+  Review({
+    required this.reviewerName,
+    required this.reviewerPhoto,
+    required this.rating,
+    required this.comment,
+  });
+
+  String reviewerName;
+  String reviewerPhoto;
+  double rating;
+  String comment;
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+    reviewerName: json["reviewerName"],
+    reviewerPhoto: json["reviewerPhoto"],
+    rating: json["rating"].toDouble(),
+    comment: json["comment"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "reviewerName": reviewerName,
+    "reviewerPhoto": reviewerPhoto,
+    "rating": rating,
+    "comment": comment,
+  };
 }

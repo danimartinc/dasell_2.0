@@ -15,6 +15,7 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
 
   String mapUrl = '';
   UserVo? adUser;
+  var auth;
 
   ResponseProductVo get data => widget.data;
   final _firebaseService = FirebaseService.get();
@@ -28,15 +29,25 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
   @override
   void initState() {
     _loadData();
+
     super.initState();
   }
 
   Future<void> _loadData() async {
+
+
+
+
+
     mapUrl =
         Provider.of<AdProvider>(context, listen: false).getLocationFromLatLang(
       latitude: data.location?.latitude,
       longitude: data.location?.longitude,
     );
+
+    auth = FirebaseAuth.instance;
+
+
 
     adUser = await _firebaseService.getUser(data.uid!);
 
@@ -59,6 +70,7 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
     }
     return '$dist desde tu ubicación';
   }
+
 
   Future<FutureOr> updateAdLocation() async {
     final adProvider = Provider.of<AdProvider>(context, listen: false);
@@ -97,6 +109,27 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
   bool get hasChat {
     return !data.isMe && !data.getIsSold();
   }
+
+  Future<double?> averageReview(List<Review>? list)async{
+    try{
+      double average = 0.0;
+      list?.forEach((element) {
+        average = average + element.rating;
+      });
+
+      average = average / list!.length;
+
+      print(average);
+
+
+      return average;
+    }catch(e){
+      return null;
+    }
+  }
+
+
+
 
   
  }
