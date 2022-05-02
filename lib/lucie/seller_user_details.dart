@@ -121,7 +121,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: userreview?[index].reviewerPhoto == ''
+                                child: userreview?[index].reviewerPhoto == '' || userreview?[index].reviewerPhoto == null
                                 //name: doc.data()['name'] ?? ''
                                 ? CircleAvatar(
                                   radius: 25,
