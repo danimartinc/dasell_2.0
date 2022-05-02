@@ -30,7 +30,7 @@ class _ProfileScreenState extends ProfileScreenState {
       stream: FirebaseFirestore.instance.collection('users').doc(uid).snapshots(),
       builder: ( context, snapshot) {
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting || !(snapshot.data?.exists ?? false)) {
           return CommonProgress();
         }
 

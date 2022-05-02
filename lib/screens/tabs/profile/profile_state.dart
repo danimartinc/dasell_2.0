@@ -140,7 +140,7 @@ abstract class ProfileScreenState extends State<ProfileScreen> {
           .then((value) => print("Delete User"))
           .catchError((error) => print("Failed to delete user: $error"));
 
-  
+        await FirebaseAuth.instance.currentUser?.delete();
         await FirebaseAuth.instance.signOut();
           
       } catch (e) {
