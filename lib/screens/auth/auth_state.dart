@@ -37,6 +37,8 @@ abstract class AuthState extends State<AuthScreen> {
               'uid': authResult!.user!.uid,
               'profilePicture': authResult!.user!.photoURL,
               'token': '',
+              //'reviews': '',
+              //'averageReview': ''
               
         });
     
