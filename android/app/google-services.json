@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "40523523478",
+    "project_id": "shop-chat-88e88",
+    "storage_bucket": "shop-chat-88e88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40523523478:android:887b5c72a40d0f1cd969b7",
+        "android_client_info": {
+          "package_name": "com.damakur.shopchat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40523523478-4195dns7sehscp28pjmgiun1aba5lfu6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.damakur.shopchat_app",
+            "certificate_hash": "33e2cc3b847ca47c2ccc7d4f96a8a85280cb1d1c"
+          }
+        },
+        {
+          "client_id": "40523523478-df1k2u6evr66agpvda69fi0ihf0v66td.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD08hvn-I_wp2_zq77dHcgi8a2hrd1o68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40523523478-df1k2u6evr66agpvda69fi0ihf0v66td.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
