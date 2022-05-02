@@ -76,7 +76,7 @@ class UserVo {
     _email = json['email'];
     _token = json['token'];
     _status = json['status'];
-    _reviews = json["reviews"] != null ? List<UserReview>.from(json["reviews"]?.map((x) => UserReview.fromJson(x))) : [];
+    _reviews = json["reviews"] != null ? List<UserReview>.from(json["reviews"]!.map((x) => UserReview.fromJson(x))) : [];
     _averageReview = json['averageReview'] ?? 0.0;
   }
 

@@ -114,20 +114,30 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                       itemCount: userreview?.length,
                       itemBuilder: (context, index) {
                         return Container(
-                          color: Colors.grey.shade300,
+                          color: Colors.grey.shade100,
                           width: MediaQuery.of(context).size.width,
                           height: 80,
                           child: Row(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  radius: 30,
-                                  backgroundColor: Colors.white,
+                                child: userreview?[index].reviewerPhoto == ''
+                                //name: doc.data()['name'] ?? ''
+                                ? CircleAvatar(
+                                  radius: 25,
+                                  child: SvgPicture.asset(
+                                    'assets/images/boy.svg',
+                                  ),
+                                )
+                                : CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage: NetworkImage(
+                                    userreview![index].reviewerPhoto,
+                                  ),
                                 ),
                               ),
                               Expanded(
-                                  child: Container(
+                                child: Container(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
