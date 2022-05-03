@@ -1,5 +1,4 @@
 import 'package:DaSell/commons.dart';
-import 'package:DaSell/screens/bottom_navigation.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 

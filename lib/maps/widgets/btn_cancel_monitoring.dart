@@ -1,12 +1,9 @@
-import 'package:fluttertoast/fluttertoast.dart';
-
 import '../../commons.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:DaSell/maps/blocs/blocs.dart';
 import 'package:animate_do/animate_do.dart';
 
-import 'cancel_monitoring_dialog.dart';
+
 
 
 
@@ -20,7 +17,7 @@ class BtnCancelMonitoring extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //final mapBloc = BlocProvider.of<MapBloc>(context);
-    LocationBloc? locationBloc;
+    //LocationBloc? locationBloc;
     final size = MediaQuery.of(context).size;
 
  

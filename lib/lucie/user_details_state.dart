@@ -1,13 +1,7 @@
-
-
+import '../commons.dart';
 import 'dart:async';
 
 import 'package:DaSell/lucie/seller_user_details.dart';
-
-import '../commons.dart';
-import '../models/user_review.dart';
-import '../screens/chat_room/chat_screen.dart';
-import '../screens/product_details/widgets/widgets.dart';
 import '../services/firebase/models/product_vo.dart';
 
 abstract class SellerUserDetailsState extends State<SellerUserDetails> {

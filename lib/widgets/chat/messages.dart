@@ -47,7 +47,7 @@ class Messages extends StatelessWidget {
             final time = (doc['timeStamp'] as Timestamp).toDate();
 
             /// se corre en setState
-            /// TODO: CHEQUEA de correr esta LOGICA, 1 sola vez cuando ingresas
+            /// CHEQUEAR de correr esta LOGICA, 1 sola vez cuando ingresas
             /// en el CHat ROOM
             // if (!isMe && doc['isRead'] == false) {
             //   // print("RUNS TRANSACTION!");

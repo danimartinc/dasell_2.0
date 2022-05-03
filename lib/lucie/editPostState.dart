@@ -1,16 +1,10 @@
-
+import '../commons.dart';
 
 import 'dart:async';
-import 'dart:ffi';
+
 
 import 'package:DaSell/lucie/PostModel.dart';
 import 'package:DaSell/lucie/editPost.dart';
-import 'package:DaSell/lucie/seller_user_details.dart';
-
-
-import '../commons.dart';
-import '../screens/chat_room/chat_screen.dart';
-import '../screens/product_details/widgets/widgets.dart';
 import '../services/firebase/models/product_vo.dart';
 
 abstract class EditPostState extends State<EditPost> {

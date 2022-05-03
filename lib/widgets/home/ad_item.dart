@@ -4,7 +4,6 @@ import '../../commons.dart';
 
 
 import '../../screens/home/product_detail_screen.dart';
-import '../../screens/product_details/product_details.dart';
 
 
 class AdItem extends StatefulWidget {

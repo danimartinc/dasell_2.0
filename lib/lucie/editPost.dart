@@ -1,16 +1,8 @@
-import 'dart:io';
-
-import 'package:DaSell/lucie/user_details_state.dart';
-import 'package:DaSell/lucie/widgets/ads_by_seller.dart';
-import 'package:DaSell/screens/product_details/product_details_state.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import '../commons.dart';
-import '../screens/product_details/widgets/widgets.dart';
+
 import '../services/firebase/models/product_vo.dart';
 import 'editPostState.dart';
-import 'widgets/widgets.dart';
+
 
 class EditPost extends StatefulWidget {
   final ResponseProductVo data;

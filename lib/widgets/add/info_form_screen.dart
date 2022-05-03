@@ -1,13 +1,9 @@
 import '../../commons.dart';
 import 'info_form_state.dart';
-//Data
-import 'package:DaSell/data/categories.dart';
+
+
 //Widgets
-
 import 'widgets/widgets.dart';
-
-
-
 
 class ProductInfoForm extends StatefulWidget {
 

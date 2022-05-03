@@ -330,7 +330,6 @@ class _MapPreviewState extends State<MapPreview> {
     void cancelMonitoring( int option ) async {
 
       if( option == 1 ) {   
-        // TODO: Disparar dispose, cancelar seguimiento
         locationBloc?.stopFollowingUser();
         showCancelMonitoringToast(); 
       }

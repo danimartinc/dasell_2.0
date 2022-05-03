@@ -32,7 +32,6 @@ class ChatRoomItem extends StatelessWidget {
             const SizedBox(height: 6),
             // request temporal para conseguir el
             // badge count del query.
-            ///TODO: refactorizar para el valor que necesita mostrar .
             // BadgeRequester(
             //   recieverId: 'receiverId',
             //   docId: 'docId',

@@ -4,7 +4,6 @@ import 'package:DaSell/services/firebase/models/product_vo.dart';
 import '../../commons.dart';
 
 //Widgets
-import 'package:DaSell/widgets/home/ad_item.dart';
 import '../tabs/home/widgets/ad_item_widget.dart';
 import 'widgets/widgets.dart';
 

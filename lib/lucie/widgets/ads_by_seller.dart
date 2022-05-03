@@ -69,18 +69,12 @@ class _MyAdsState extends AdsBySellerScreenState {
                   final vo = adsBySeller[i];
                   vo.tag = 'publicaados_${ vo.id }';
 
-                 return AdItemWidget(
+                  return AdItemWidget(
                     data: vo,
                     onTap: () => onItemTap(vo),
                     onLikeTap: () => onItemLike(vo),
-                );
+                  );
 
-                  //TODO: Widget viejo
-                  /*return AdItem(
-                    documents[i],
-                    documents[i]['uid'] == uid,
-                    uid,
-                  );*/
                 },
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 3 / 2,

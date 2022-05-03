@@ -157,9 +157,8 @@ class ResponseProductVo {
   }
 
   void toggleLike() {
+    
     isFav = !isFav;
-
-    /// TODO: update UI.
     FirebaseService.get().setLikeProduct(id, isFav);
   }
 

@@ -1,15 +1,9 @@
-import 'dart:io';
+import '../commons.dart';
 
 import 'package:DaSell/lucie/user_details_state.dart';
 import 'package:DaSell/lucie/widgets/ads_by_seller.dart';
-import 'package:DaSell/screens/product_details/product_details_state.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../commons.dart';
-import '../models/user_review.dart';
-import '../screens/product_details/widgets/widgets.dart';
 import '../services/firebase/models/product_vo.dart';
 import 'widgets/widgets.dart';
 
@@ -195,7 +189,14 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text("Escribe una opinión"),
+                    Text( '¿Cómo valoras tu experiencia con ${ textAdUserName }?',
+                    style: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                            ),  
+                    ),
+                    Text( 'Valora al vendedor y ayuda a otros usuarios en futuras ventas',
+                    textAlign: TextAlign.center,),
                     RatingBar.builder(
                       initialRating: rating,
                       minRating: 1,
@@ -257,10 +258,18 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                         //print(adUser?.reviews![0].comment);
                       },
                       child: Container(
-                        color: Colors.orange,
+                        color: Theme.of(context).primaryColor,
                         width: MediaQuery.of(context).size.width,
                         height: 50,
-                        child: Center(child: Text( 'Enviar' )),
+                        child: Center(
+                          child: Text(
+                            'Enviar',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),  
+                          )
+                        ),
                       ),
                     )
                   ],
