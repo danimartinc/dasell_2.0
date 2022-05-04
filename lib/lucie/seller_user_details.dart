@@ -58,7 +58,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                     children: [
                       RatingBarIndicator(
                         itemSize: 14,
-                        rating: adUser?.averageReview ?? 0,
+                        rating: adUser?.averageReview ?? 0.0,
                         direction: Axis.horizontal,
                         itemCount: 5,
                         itemBuilder: (context, _) => Icon(
@@ -230,7 +230,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                         //print(FirebaseService.get().myUserVo?.toJson());
                         print(FirebaseService.get().uid);
                         UserReview revi = new UserReview(reviewerName: asd.name ?? "", reviewerPhoto: asd.profilePicture ?? "", rating: rating, comment: commentController.text);
-                        print(revi.toJson());
+                        print( "REVIEWER: ${revi.toJson()}" );
 
                         var average = await averageReview(userreview);
 

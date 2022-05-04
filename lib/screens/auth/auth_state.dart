@@ -32,14 +32,13 @@ abstract class AuthState extends State<AuthScreen> {
         .collection('users')
         .doc( authResult!.user!.uid )
         .set({
-              'email': authResult!.user!.email,
-              'name': authResult!.user!.displayName,
-              'uid': authResult!.user!.uid,
-              'profilePicture': authResult!.user!.photoURL,
-              'token': '',
-              //'reviews': '',
-              //'averageReview': ''
-              
+          'email': authResult!.user!.email,
+          'name': authResult!.user!.displayName,
+          'uid': authResult!.user!.uid,
+          'profilePicture': authResult!.user!.photoURL,
+          'token': '',
+          //'reviews': [],
+          //'averageReview': 0.0            
         });
     
     return authResult;
@@ -76,22 +75,17 @@ abstract class AuthState extends State<AuthScreen> {
               'uid': authResult.user!.uid,
               'profilePicture': '',
               'token': '',
-              'status': 'Unavalible'
+              'status': 'Unavalible',
+              //'reviews': '',
+              //'averageReview': '' 
             });
-        //not needed if using StreamBuilder in main.dart
-        // Navigator.of(context).pushNamed(
-        //   ChatScreen.routeName,
-        // );
+
       } else {
 
         authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email!,
           password: password!,
         );
-        //not needed if using StreamBuilder in main.dart
-        // Navigator.of(context).pushNamed(
-        //   ChatScreen.routeName,
-        // );
       }
     } on PlatformException catch (error) {
       setState(() {

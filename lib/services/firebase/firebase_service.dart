@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:DaSell/commons.dart';
-import 'package:DaSell/lucie/PostModel.dart';
+import 'package:DaSell/models/edit_product.dart';
 
 import 'package:DaSell/screens/tabs/chat/models.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -101,9 +101,9 @@ class FirebaseService {
     return UserVo.fromJson(userData.data());
   }
 
-  Future<PostModel> getPostData(String postId) async {
+  Future<EditProduct> getPostData(String postId) async {
     final postData = await firestore.collection('products').doc(postId).get();
-    return PostModel.fromJson(postData.data()!);
+    return EditProduct.fromJson(postData.data()!);
   }
 
   Future<bool> updatePostData(String postId, Map<String, dynamic> data) async {

@@ -105,18 +105,23 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
 
     try{
 
-      double average = 0.0;
+      double? average = 0.0;
 
-      list?.forEach((element) {
-        average = average + element.rating;
+      if(list!.length == 0) return 0;
+
+      list.forEach((element) {
+        average = (average! + element.rating);
       });
 
-      average = average / list!.length;
+      average = (average! / list.length);
 
-      print(average);
+      print( 'LENGTH: ${list.length}');
+
+      print( 'AVERAGE REVIEW: $average');
 
       return average;
     }catch(e){
+      print( 'PROBANDO' + e.toString() );
       return null;
     }
   }

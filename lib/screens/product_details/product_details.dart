@@ -1,5 +1,5 @@
 import 'package:DaSell/commons.dart';
-import 'package:DaSell/lucie/editPost.dart';
+import 'package:DaSell/lucie/edit_product_details.dart';
 import 'package:DaSell/lucie/seller_user_details.dart';
 import 'package:DaSell/services/firebase/models/product_vo.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -345,9 +345,13 @@ PreferredSizeWidget? _customAppBar() {
       backgroundColor: Colors.indigo.shade800.withOpacity((scrollOffset / 230).clamp(0, 1).toDouble()),
       actions: [
         if(data.isMe)
-        InkWell(onTap: (){
-          Navigator.push(context,MaterialPageRoute(builder: (builder)=>EditPost(data: data)));
-        },child: Icon(Icons.edit, color: color,)),
+        InkWell(
+          onTap: (){
+            Navigator.push(context,MaterialPageRoute(builder: (builder)=> EditProductDetails(data: data)));
+          },
+          child: Icon(  Icons.edit, color: color, )
+        ),
+        
         if(data.isMe)
         ActionButtonMoreOptions(onDelete: onDeleteTap, onSell: onSellTap, iconColor: color,),
 

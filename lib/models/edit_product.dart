@@ -6,12 +6,13 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-PostModel postModelFromJson(String str) => PostModel.fromJson(json.decode(str));
+EditProduct postModelFromJson(String str) => EditProduct.fromJson(json.decode(str));
 
-String postModelToJson(PostModel data) => json.encode(data.toJson());
+String postModelToJson( EditProduct data ) => json.encode(data.toJson());
 
-class PostModel {
-  PostModel({
+class EditProduct {
+
+  EditProduct({
     required this.categories,
     required this.condition,
     required this.createdAt,
@@ -43,7 +44,7 @@ class PostModel {
   String? title;
   String? uid;
 
-  factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
+  factory EditProduct.fromJson(Map<String, dynamic> json) => EditProduct(
     categories: List<String>.from(json["categories"].map((x) => x)),
     condition: json["condition"],
     createdAt: json["createdAt"],
