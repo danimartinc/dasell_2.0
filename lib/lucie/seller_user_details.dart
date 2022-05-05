@@ -229,8 +229,17 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                         print(asd);
                         //print(FirebaseService.get().myUserVo?.toJson());
                         print(FirebaseService.get().uid);
-                        UserReview revi = new UserReview(reviewerName: asd.name ?? "", reviewerPhoto: asd.profilePicture ?? "", rating: rating, comment: commentController.text);
+
+                        UserReview revi = new UserReview(
+                            reviewerName: asd.name ?? "", 
+                            reviewerPhoto: asd.profilePicture ?? "", 
+                            rating: rating, 
+                            comment: commentController.text
+                        );
+
                         print( "REVIEWER: ${revi.toJson()}" );
+
+                        userreview!.add(revi); 
 
                         var average = await averageReview(userreview);
 
@@ -245,7 +254,6 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                             );
 
                         print("in");
-                        userreview!.add(revi);
 
                         setState(() {
                           commentController.clear();

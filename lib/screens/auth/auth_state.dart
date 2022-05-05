@@ -31,7 +31,7 @@ abstract class AuthState extends State<AuthScreen> {
     FirebaseFirestore.instance
         .collection('users')
         .doc( authResult!.user!.uid )
-        .set({
+        .update({
           'email': authResult!.user!.email,
           'name': authResult!.user!.displayName,
           'uid': authResult!.user!.uid,

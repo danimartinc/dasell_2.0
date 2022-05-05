@@ -7,7 +7,7 @@ import 'package:DaSell/models/edit_product.dart';
 import 'package:DaSell/lucie/edit_product_details.dart';
 import '../services/firebase/models/product_vo.dart';
 
-abstract class EditPostState extends State<EditProductDetails> {
+abstract class EditProductState extends State<EditProductDetails> {
 
   UserVo? adUser;
   var auth;
@@ -29,18 +29,15 @@ abstract class EditPostState extends State<EditProductDetails> {
 
   @override
   void initState() {
-    _loadData();
 
+    _loadData();
     super.initState();
   }
 
   Future<void> _loadData() async {
 
-
     auth = FirebaseAuth.instance;
-
-
-
+    
     adUser = await _firebaseService.getUser(data.uid!);
     EditProduct postModel = await _firebaseService.getPostData(data.id.toString());
 

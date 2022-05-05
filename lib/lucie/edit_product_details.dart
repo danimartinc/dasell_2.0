@@ -18,7 +18,7 @@ class EditProductDetails extends StatefulWidget {
   createState() => _EditProductDetails();
 }
 
-class _EditProductDetails extends EditPostState {
+class _EditProductDetails extends EditProductState {
   
 
   @override
@@ -29,7 +29,9 @@ class _EditProductDetails extends EditPostState {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+         title: Text('Editar publicación'),
+      ),
       body: ListView(
       children: [
         Form(
@@ -121,7 +123,6 @@ class _EditProductDetails extends EditPostState {
                       ],
                     ),
                     Divider(),                    
-                    //MakeShipmentsSwitch(),
 
                     AnimatedContainer(
                       duration: Duration(milliseconds: 300),
@@ -136,10 +137,12 @@ class _EditProductDetails extends EditPostState {
                           ),
                           labelText: 'Precio',
                           labelStyle: TextStyle(
-                            fontSize: 20, fontFamily: 'Poppins'),
+                            fontSize: 20, 
+                            fontFamily: 'Poppins'
+                          ),
                         ),
                       ),
-                ),
+                    ),
 
                     SwitchListTile.adaptive(
                       title: Text(
@@ -181,27 +184,8 @@ class _EditProductDetails extends EditPostState {
                   ],
                 ),
               ),
-            ),
-            //NextScreenButton(onPressed: trySubmit, ),
-    
-         TextFormField(
-            controller: TitleController,
-            decoration: InputDecoration(
-              hintText: "Enter title",
-            ),
-          ),
-          TextFormField(
-            controller: DescriptionController,
-            decoration: InputDecoration(
-              hintText: "Enter title",
-            ),
-          ),
-          TextFormField(
-            controller: PriceController,
-            decoration: InputDecoration(
-              hintText: "Enter title",
-            ),
-          ),
+            ),    
+
           TextFormField(
             controller: CategoryController,
             decoration: InputDecoration(
@@ -209,11 +193,36 @@ class _EditProductDetails extends EditPostState {
             ),
           ),
 
-          InkWell(onTap: (){
-            updateData();
-          },child: Container(child: Text("click me"),))
-        ],
+          InkWell(
+            onTap: (){},
+            child: Container(
+              child:  Padding(
+                padding: const EdgeInsets.all(50.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
+                  ),  
+                  //shape: StadiumBorder(),
+                  child: Container(
+                    width: 150,
+                    height: 55,
+                    child: Center(
+                      child: Text('Actualizar publicación',),
+                      //child: Text( this.text , style: TextStyle( color: Colors.white, fontSize: 17 )),
+                    ),
+                  ),
+                  // Icons.arrow_forward, 
+                  onPressed: (){
+                    updateData();
+                  },
+                ),
+              ),
+            ),
+          ),
+      ],
       ),
-    );
+  );
   }
 }
