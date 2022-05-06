@@ -1,3 +1,4 @@
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
 import '../commons.dart';
@@ -114,21 +115,10 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                       itemCount: userreview?.length,
                       itemBuilder: (context, index) {
 
-                        String reviewDate = userreview?[index].date?.toDate().toString() ?? "";
-                         /// Utility to get format.
-                       //final _dateFormat = DateFormat('d MMMM, y','es_ES');
+                        DateTime? reviewDate =  userreview?[index].date?.toDate() ?? null;
 
-                       //DateTime tempDate = new DateFormat("dd-MM-yyyy").parse(reviewDate);
-
-
-                       //String formattedDateTime = DateFormat('yyyy-MM-dd – kk:mm').format(reviewDate);
-
-                  //print('$formattedDateTime');
-
-                       //final headerTitle = _dateFormat.format(reviewDate);
-
-                        //DateFormat('dd/mm/aaaa').format(reviewDate);
-                        
+                        String formatDate = DateFormat('dd-MM-yyyy').format( reviewDate! );
+                
                         return Container(
                           color: Colors.grey.shade100,
                           width: MediaQuery.of(context).size.width,
@@ -186,7 +176,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: Text(
-                                            reviewDate,
+                                            formatDate,
                                           ),
                                         ),
 

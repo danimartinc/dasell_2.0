@@ -21,6 +21,8 @@ class UserReview {
 
   factory UserReview.fromJson(Map<String, dynamic> json) {
 
+    //print(json["date"]);
+
     return UserReview(
       reviewerName: json["reviewerName"],
       reviewerPhoto: json["reviewerPhoto"],
