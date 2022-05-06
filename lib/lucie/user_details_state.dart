@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../commons.dart';
 import 'dart:async';
 
@@ -133,6 +135,12 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
       return "";
     }
     return AppUtils.getTimeAgoText( time! );
+  }
+
+  String formatTimestamp(int timestamp) {
+      var format = new DateFormat('d MMM, hh:mm a');
+      var date = new DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+      return format.format(date);
   }
 
 

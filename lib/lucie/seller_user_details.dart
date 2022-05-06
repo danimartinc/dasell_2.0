@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../commons.dart';
 
 import 'package:DaSell/lucie/user_details_state.dart';
@@ -39,7 +41,8 @@ class _SellerUserDetailsState extends SellerUserDetailsState
   Widget build(BuildContext context) {
 
     List<UserReview>? userreview = adUser?.reviews;
-    final date = Timestamp.now();
+    final dateNow = Timestamp.now();
+    final timeNow =  dateNow.toDate();
     
     return Scaffold(
       appBar: AppBar(),
@@ -110,10 +113,26 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                   child: ListView.builder(
                       itemCount: userreview?.length,
                       itemBuilder: (context, index) {
+
+                        String reviewDate = userreview?[index].date?.toDate().toString() ?? "";
+                         /// Utility to get format.
+                       //final _dateFormat = DateFormat('d MMMM, y','es_ES');
+
+                       //DateTime tempDate = new DateFormat("dd-MM-yyyy").parse(reviewDate);
+
+
+                       //String formattedDateTime = DateFormat('yyyy-MM-dd – kk:mm').format(reviewDate);
+
+                  //print('$formattedDateTime');
+
+                       //final headerTitle = _dateFormat.format(reviewDate);
+
+                        //DateFormat('dd/mm/aaaa').format(reviewDate);
+                        
                         return Container(
                           color: Colors.grey.shade100,
                           width: MediaQuery.of(context).size.width,
-                          height: 80,
+                          height: 90,
                           child: Row(
                             children: [
                               Padding(
@@ -159,10 +178,20 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                           userreview[index].reviewerName,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 12),
+                                              fontSize: 16),
                                         ),
+                                        kGap10,
                                         Text(userreview[index].comment),
-                                         Text(userreview[index].date.toString()),
+                                        kGap5,
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            reviewDate,
+                                          ),
+                                        ),
+
+                                         
+                                         
                                        //Text( textTime ),
                                          //Text( timeago.format(date.toString()))
 
@@ -226,7 +255,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                     InkWell(
                       onTap: () async {
 
-                     print( 'TIMESTAMP $date');
+                     print( 'TIMESTAMP $dateNow');
 
                         // Map<String, dynamic> rate = {
                         //   "rating": 1,
@@ -245,9 +274,9 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                             reviewerPhoto: asd.profilePicture ?? "", 
                             rating: rating, 
                             comment: commentController.text, 
-                            date: date
+                            date: dateNow
                         );
-
+print( 'TIMENOW $timeNow');
                
 
                         print( "REVIEWER: ${revi.toJson()}" );

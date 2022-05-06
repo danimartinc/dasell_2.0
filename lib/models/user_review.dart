@@ -1,7 +1,13 @@
-
 import '../commons.dart';
 
 class UserReview {
+
+  
+  String reviewerName;
+  String reviewerPhoto;
+  double rating;
+  String comment;
+  final Timestamp? date;
 
   UserReview({
     required this.reviewerName,
@@ -12,20 +18,19 @@ class UserReview {
     
   });
 
-  String reviewerName;
-  String reviewerPhoto;
-  double rating;
-  String comment;
-  final Timestamp? date;
 
-  factory UserReview.fromJson(Map<String, dynamic> json) => UserReview(
-    reviewerName: json["reviewerName"],
-    reviewerPhoto: json["reviewerPhoto"],
-    rating: json["rating"].toDouble(),
-    comment: json["comment"],
-    date: json["date"]
+  factory UserReview.fromJson(Map<String, dynamic> json) {
 
-  );
+    return UserReview(
+      reviewerName: json["reviewerName"],
+      reviewerPhoto: json["reviewerPhoto"],
+      rating: json["rating"].toDouble(),
+      comment: json["comment"],
+      date: json["date"]
+
+    );
+  }
+  
 
   Map<String, dynamic> toJson() => {
     "reviewerName": reviewerName,
