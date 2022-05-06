@@ -11,6 +11,7 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
   String mapUrl = '';
   UserVo? adUser;
   var auth;
+  DateTime? time;
 
   ResponseProductVo get data => widget.data;
   final _firebaseService = FirebaseService.get();
@@ -74,9 +75,9 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
     update();
   }
 
-  String get textPublicationDate {
-    return AppUtils.publicationDate(data.createdAt?.toDate());
-  }
+ /* String get textReviewDate {
+    return AppUtils.reviewerDate( date.toDate());
+  }*/
 
   String get textAdUserName {
     if (adUser == null) return '-';
@@ -126,5 +127,15 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
       return null;
     }
   }
+
+    String get textTime {
+    if ( time == null) {
+      return "";
+    }
+    return AppUtils.getTimeAgoText( time! );
+  }
+
+
+  
   
 }

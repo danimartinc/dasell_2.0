@@ -241,14 +241,11 @@ class FirebaseService {
       final otherUserId = room.getOtherUserId(uid);
       final user = chatUsersMap[otherUserId];
 
-      trace( 'otherUser ${ otherUserId }');
-      trace( 'user ${ user }' );
       if (user == null) {
         print("Gran problema... el otro usuario no puede no existir");
         return [];
       }
 
-      trace( 'user después de NULL ${ user }' );
       var count = await getChatUnreadCount(roomId: room.docId);
       String subtitle = room.lastMessage ?? '';
       if (room.sentByMe) {
@@ -288,13 +285,12 @@ class FirebaseService {
 
   /// Podemos usar esto para invalidar el Stream que escucha la lista de chats.
   Future<void> markRoomForUpdate(String roomId) async {
-    trace('Entra al update');
+
     await firestore.collection('chats').doc(roomId).update({
       'lastModification': FieldValue.serverTimestamp(),
     }).then((value) => print("Update LastModification"))
       .catchError((error) => print("Failed to add LastModification: $error"));
-    
-    trace('Update lastModification');
+
   }
 
   Future<void> setChatUnreadZero({required String roomId}) async {

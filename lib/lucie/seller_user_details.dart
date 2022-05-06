@@ -6,6 +6,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../services/firebase/models/product_vo.dart';
 import 'widgets/widgets.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
 
 class SellerUserDetails extends StatefulWidget {
   final ResponseProductVo data;
@@ -37,6 +39,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
   Widget build(BuildContext context) {
 
     List<UserReview>? userreview = adUser?.reviews;
+    final date = Timestamp.now();
     
     return Scaffold(
       appBar: AppBar(),
@@ -150,8 +153,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                       ),
                                     ),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           userreview[index].reviewerName,
@@ -159,7 +161,12 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12),
                                         ),
-                                        Text(userreview[index].comment)
+                                        Text(userreview[index].comment),
+                                         Text(userreview[index].date.toString()),
+                                       //Text( textTime ),
+                                         //Text( timeago.format(date.toString()))
+
+                                         //timeago.format(firestoreTimestamp.toDate());
                                       ],
                                     )
                                   ],
@@ -189,7 +196,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text( '¿Cómo valoras tu experiencia con ${ textAdUserName }?',
+                    Text( '¿Cómo valoras tu experiencia con $textAdUserName ?',
                     style: TextStyle(
                               color: Colors.black87,
                               fontWeight: FontWeight.bold,
@@ -218,6 +225,9 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                     ),
                     InkWell(
                       onTap: () async {
+
+                     print( 'TIMESTAMP $date');
+
                         // Map<String, dynamic> rate = {
                         //   "rating": 1,
                         //   "comment": "fdfsdfsdfsdfdfgdgdfgdfgdfgfhfhfghfhg43gg2423423",
@@ -234,8 +244,11 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                             reviewerName: asd.name ?? "", 
                             reviewerPhoto: asd.profilePicture ?? "", 
                             rating: rating, 
-                            comment: commentController.text
+                            comment: commentController.text, 
+                            date: date
                         );
+
+               
 
                         print( "REVIEWER: ${revi.toJson()}" );
 
@@ -254,6 +267,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                             );
 
                         print("in");
+                        print( 'trata $textTime');
 
                         setState(() {
                           commentController.clear();

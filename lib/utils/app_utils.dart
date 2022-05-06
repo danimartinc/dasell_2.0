@@ -37,7 +37,7 @@ trace(
   );
 }
 
-/// Usa clase global para poner helpers aca.
+/// Uso clase global para poner helpers
 abstract class AppUtils {
   static String getTimeAgoText(DateTime date) {
     // return '3 minutes ago';
@@ -51,6 +51,15 @@ abstract class AppUtils {
     final day = date.day.toString();
     final month = _monthsById[date.month] ?? '-';
     return '$day $month';
+  }
+
+  static String reviewerDate( DateTime? date ) {
+    if(date==null){
+      return 'algun dia';
+    }
+    final day = date.day.toString();
+    final month = _monthsById[date.month] ?? '-';
+    return '$day / $month';
   }
 
   static final Map<int, String> _monthsById = {
