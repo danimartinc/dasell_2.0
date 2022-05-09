@@ -198,10 +198,5 @@ abstract class EditProductState extends State<EditProductDetails> {
     return null;
 
   }
-
-
-
-
-
-
+  
 }
