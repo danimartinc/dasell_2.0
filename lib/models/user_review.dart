@@ -7,6 +7,8 @@ class UserReview {
   String reviewerPhoto;
   double rating;
   String comment;
+  String reviewerid;
+  String commentid;
   final Timestamp? date;
 
   UserReview({
@@ -14,8 +16,9 @@ class UserReview {
     required this.reviewerPhoto,
     required this.rating,
     required this.comment,
-    required this.date
-    
+    required this.date,
+    required this.reviewerid,
+    required this.commentid
   });
 
 
@@ -28,7 +31,9 @@ class UserReview {
       reviewerPhoto: json["reviewerPhoto"],
       rating: json["rating"].toDouble(),
       comment: json["comment"],
-      date: json["date"]
+      date: json["date"],
+        reviewerid: json["reviewerid"],
+      commentid: json["commentid"]
 
     );
   }
@@ -40,6 +45,8 @@ class UserReview {
     "rating": rating,
     "comment": comment,
     "date": date,
+    "reviewerid":reviewerid,
+    "commentid":commentid
   };
 
   /*String get textTime {

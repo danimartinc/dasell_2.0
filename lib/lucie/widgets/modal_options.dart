@@ -5,6 +5,10 @@ import '../../commons.dart';
 
 class ModalOptions  extends StatefulWidget {
 
+  final VoidCallback onTap;
+
+  const ModalOptions({Key? key, required this.onTap}) : super(key: key);
+
   _ModalOptionsState createState() => _ModalOptionsState();
 }
 
@@ -15,8 +19,8 @@ class _ModalOptionsState extends State<ModalOptions> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Container(
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -35,14 +39,19 @@ class _ModalOptionsState extends State<ModalOptions> {
   }
 
   void _onButtonPressed() {
+
     showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
             color: Color(0xFF737373),
-            height: 180,
+            height: 140,
             child: Container(
-              child: _buildBottomNavigationMenu(),
+              child: Column(
+                children: [ 
+                  BottomNavigationMenu(icon: Icon(Icons.ac_unit),text: Text('Editar opinión'), onTap: () {  }, ),
+                  BottomNavigationMenu(icon: Icon(Icons.accessibility_new),text: Text('Eliminar opinión'), onTap: () {  }),
+                ]),
               decoration: BoxDecoration(
                 color: Theme.of(context).canvasColor,
                 borderRadius: BorderRadius.only(
@@ -55,27 +64,24 @@ class _ModalOptionsState extends State<ModalOptions> {
         });
   }
 
-  Column _buildBottomNavigationMenu() {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          leading: Icon(Icons.ac_unit),
-          title: Text('Editar opinión'),
-          onTap: () => _selectItem('Cooling'),
-        ),
-        ListTile(
-          leading: Icon(Icons.accessibility_new),
-          title: Text('Eliminar opinión'),
-          onTap: () => _selectItem('People'),
-        ),
-      ],
-    );
-  }
+}
 
-  void _selectItem(String name) {
-    Navigator.pop(context);
-    setState(() {
-      _selectedItem = name;
-    });
+class BottomNavigationMenu extends StatelessWidget {
+
+  final VoidCallback onTap;
+  final Icon icon;
+  final Text text;
+
+  const BottomNavigationMenu({Key? key, required this.onTap, required this.icon, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    
+
+        return ListTile(
+          leading: icon,
+          title: text,
+          onTap: onTap,
+        );
   }
 }
