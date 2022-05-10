@@ -46,9 +46,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
 
     List<UserReview>? userreview = adUser?.reviews;
     final dateNow = Timestamp.now();
-    final timeNow =  dateNow.toDate();
-    
-  String _selectedItem = '';
+    String _selectedItem = '';
     
     return Scaffold(
       appBar: AppBar(),
@@ -179,129 +177,114 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                                                   text: Text('Editar opinión'), 
                                                                   onTap: () {    
                                      
-                                          double rating = 1;
-                                          commentController.text = userreview[index].comment;
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                  content: Container(
-                                                    height: 250,
-                                                    child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                      children: [
-                                                        Text( '¿Cómo valoras tu experiencia con $textAdUserName ?',
-                                                          style: TextStyle(
-                                                            color: Colors.black87,
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                        Text( 'Valora al vendedor y ayuda a otros usuarios en futuras ventas',
-                                                          textAlign: TextAlign.center,),
-                                                        RatingBar.builder(
-                                                          initialRating: userreview[index].rating,
-                                                          minRating: 1,
-                                                          direction: Axis.horizontal,
-                                                          allowHalfRating: true,
-                                                          itemCount: 5,
-                                                          itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                                                          itemBuilder: (context, _) => Icon(
-                                                            Icons.star,
-                                                            color: Colors.amber,
-                                                          ),
-                                                          onRatingUpdate: ( ratingg ) {
-                                                            rating = ratingg;
-                                                          },
-                                                        ),
-                                                        TextFormField(
-                                                          decoration: InputDecoration(hintText: "Introduce un comentario..."),
-                                                          controller: commentController,
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () async {
+                                                                    double rating = 1;
+                                                                    commentController.text = userreview[index].comment;
+                                                                    showDialog(
+                                                                      context: context,
+                                                                      builder: (BuildContext context) {
+                                                                        return AlertDialog(
+                                                                            content: Container(
+                                                                              height: 250,
+                                                                              child: Column(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                                                children: [
+                                                                                  Text( '¿Cómo valoras tu experiencia con $textAdUserName ?',
+                                                                                    style: TextStyle(
+                                                                                      color: Colors.black87,
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text( 'Valora al vendedor y ayuda a otros usuarios en futuras ventas',
+                                                                                    textAlign: TextAlign.center,),
+                                                                                  RatingBar.builder(
+                                                                                    initialRating: userreview[index].rating,
+                                                                                    minRating: 1,
+                                                                                    direction: Axis.horizontal,
+                                                                                    allowHalfRating: true,
+                                                                                    itemCount: 5,
+                                                                                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                                                                                    itemBuilder: (context, _) => Icon(
+                                                                                      Icons.star,
+                                                                                      color: Colors.amber,
+                                                                                    ),
+                                                                                    onRatingUpdate: ( ratingg ) {
+                                                                                      rating = ratingg;
+                                                                                    },
+                                                                                  ),
+                                                                                  TextFormField(
+                                                                                    decoration: InputDecoration(hintText: "Introduce un comentario..."),
+                                                                                    controller: commentController,
+                                                                                  ),
+                                                                                  InkWell(
+                                                                                    onTap: () async {
 
-                                                            print( 'TIMESTAMP $dateNow');
+                                                                                      UserVo asd = await FirebaseService.get().getUser(FirebaseService.get().uid);
+                                                                                      print(asd);
+                                                                                      //print(FirebaseService.get().myUserVo?.toJson());
+                                                                                      print(asd.uid);
 
-                                                            // Map<String, dynamic> rate = {
-                                                            //   "rating": 1,
-                                                            //   "comment": "fdfsdfsdfsdfdfgdgdfgdfgdfgfhfhfghfhg43gg2423423",
-                                                            //   //"reviewerId":FirebaseService.get().auth.currentUser?.uid,
-                                                            //   "reviewerName":FirebaseService.get().myUserVo?.name,
-                                                            //   "reviewerPhoto":FirebaseService.get().myUserVo?.profilePicture,
-                                                            // };
-                                                            UserVo asd = await FirebaseService.get().getUser(FirebaseService.get().uid);
-                                                            print(asd);
-                                                            //print(FirebaseService.get().myUserVo?.toJson());
-                                                            print(asd.uid);
+                                                                                      UserReview revi = new UserReview(
+                                                                                          reviewerName: userreview[index].reviewerName,
+                                                                                          reviewerPhoto: userreview[index].reviewerPhoto,
+                                                                                          rating: rating,
+                                                                                          comment: commentController.text,
+                                                                                          date: dateNow,
+                                                                                          reviewerid: userreview[index].reviewerid,
+                                                                                          commentid: userreview[index].commentid
+                                                                                      );
 
-                                                            UserReview revi = new UserReview(
-                                                                reviewerName: userreview[index].reviewerName,
-                                                                reviewerPhoto: userreview[index].reviewerPhoto,
-                                                                rating: rating,
-                                                                comment: commentController.text,
-                                                                date: dateNow,
-                                                                reviewerid: userreview[index].reviewerid,
-                                                                commentid: userreview[index].commentid
-                                                            );
-                                                            print( 'TIMENOW $timeNow');
+                                                                                      print( "REVIEWER: ${userreview.asMap()}" );
 
+                                                                                      userreview[index] = revi;
 
-                                                            print( "REVIEWER: ${userreview.asMap()}" );
+                                                                                      var average = await averageReview(userreview);
 
-                                                            userreview[index] = revi;
+                                                                                      //var json = jsonEncode(userreview.map((e) => e.toJson()));
+                                                                                      var json = userreview.map((e) => e.toJson());
+                                                                                      print(json.toList(
+                                                                                      ));
 
-                                                            var average = await averageReview(userreview);
+                                                                                      FirebaseService.get()
+                                                                                          .firestore
+                                                                                          .collection("users")
+                                                                                          .doc( adUser?.uid )
+                                                                                          .update(
+                                                                                          {
+                                                                                            "reviews": json.toList(), "averageReview" : average
+                                                                                          }
+                                                                                      );
 
-                                                            //var json = jsonEncode(userreview.map((e) => e.toJson()));
-                                                            var json = userreview.map((e) => e.toJson());
-                                                            print(json.toList(
-                                                            ));
+                                                                                      print("in");
 
-                                                            FirebaseService.get()
-                                                                .firestore
-                                                                .collection("users")
-                                                                .doc( adUser?.uid )
-                                                                .update(
-                                                                {
-                                                                  "reviews": json.toList(), "averageReview" : average
-                                                                }
-                                                            );
+                                                                                      setState(() {
+                                                                                        commentController.clear();
 
-                                                            print("in");
-                                                            print( 'trata $textTime');
+                                                                                      });
+                                                                                      context.pop();
 
-                                                            setState(() {
-                                                              commentController.clear();
-
-                                                            });
-                                                            context.pop();
-
-                                                            //var tuh = await FirebaseFirestore.instance.collection("users").doc(adUser?.uid).get();
-                                                            //print(tuh.data());
-                                                            //print(adUser?.reviews![0].comment);
-                                                          },
-                                                          child: Container(
-                                                            color: Theme.of(context).primaryColor,
-                                                            width: MediaQuery.of(context).size.width,
-                                                            height: 50,
-                                                            child: Center(
-                                                                child: Text(
-                                                                  'Enviar',
-                                                                  style: TextStyle(
-                                                                    color: Colors.white,
-                                                                    fontWeight: FontWeight.bold,
-                                                                  ),
-                                                                )
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ));
-                                            },
-                                          );
-                                        
-                                          }, ),
+                                                                                    },
+                                                                                    child: Container(
+                                                                                      color: Theme.of(context).primaryColor,
+                                                                                      width: MediaQuery.of(context).size.width,
+                                                                                      height: 50,
+                                                                                      child: Center(
+                                                                                          child: Text(
+                                                                                            'Enviar',
+                                                                                            style: TextStyle(
+                                                                                              color: Colors.white,
+                                                                                              fontWeight: FontWeight.bold,
+                                                                                            ),
+                                                                                          )
+                                                                                      ),
+                                                                                    ),
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                            ));
+                                                                      },
+                                                                    );
+                                                                    },
+                                                                ),
                                                                 BottomNavigationMenu(
                                                                   icon: Icon(Icons.delete),
                                                                   text: Text('Eliminar opinión'), 
@@ -316,28 +299,27 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                                                         .collection("users")
                                                                         .doc( adUser?.uid )
                                                                         .update(
-                                                                        {
-                                                                          "reviews": FieldValue.arrayRemove([deleteData]), "averageReview" : average
-                                                                        }
-
-
-                                                                    );
-                                                                    setState(() {});
-                                                                  },
-                                                                )
+                                                                          {
+                                                                            "reviews": FieldValue.arrayRemove([deleteData]), "averageReview" : average
+                                                                          }
+                                                                        );
+                                                                        
+                                                                        setState(() {});
+                                                                    },
+                                                                  ),
                                           
-                                                      ],
-                                                      ),
-                                                    decoration: BoxDecoration(
-                                                      color: Theme.of(context).canvasColor,
-                                                      borderRadius: BorderRadius.only(
-                                                        topLeft: const Radius.circular(10),
-                                                        topRight: const Radius.circular(10),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              }), 
+                                                                ],
+                                                                ),
+                                                                decoration: BoxDecoration(
+                                                                  color: Theme.of(context).canvasColor,
+                                                                  borderRadius: BorderRadius.only(
+                                                                    topLeft: const Radius.circular(10),
+                                                                    topRight: const Radius.circular(10),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }), 
                                                   ),
                                                   Text(
                                                     _selectedItem,
@@ -441,27 +423,18 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                     InkWell(
                       onTap: () async {
 
-                     print( 'TIMESTAMP $dateNow');
-
-                        // Map<String, dynamic> rate = {
-                        //   "rating": 1,
-                        //   "comment": "fdfsdfsdfsdfdfgdgdfgdfgdfgfhfhfghfhg43gg2423423",
-                        //   //"reviewerId":FirebaseService.get().auth.currentUser?.uid,
-                        //   "reviewerName":FirebaseService.get().myUserVo?.name,
-                        //   "reviewerPhoto":FirebaseService.get().myUserVo?.profilePicture,
-                        // };
                         UserVo asd = await FirebaseService.get().getUser(FirebaseService.get().uid);
                         print(asd);
                         //print(FirebaseService.get().myUserVo?.toJson());
                         print(asd.uid);
 
                         UserReview revi = new UserReview(
-                            reviewerName: asd.name ?? "", 
-                            reviewerPhoto: asd.profilePicture ?? "", 
-                            rating: rating, 
-                            comment: commentController.text, 
-                            date: dateNow,
-                            reviewerid: asd.uid,
+                          reviewerName: asd.name ?? "", 
+                          reviewerPhoto: asd.profilePicture ?? "", 
+                          rating: rating, 
+                          comment: commentController.text, 
+                          date: dateNow,
+                          reviewerid: asd.uid,
                           commentid: userreview!.length.toString()
                         );
 
@@ -481,18 +454,12 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                               }
                             );
 
-                        print("in");
-                        print( 'trata $textTime');
-
                         setState(() {
                           commentController.clear();
 
                         });
                         context.pop();
-
-                        //var tuh = await FirebaseFirestore.instance.collection("users").doc(adUser?.uid).get();
-                        //print(tuh.data());
-                        //print(adUser?.reviews![0].comment);
+                        
                       },
                       child: Container(
                         color: Theme.of(context).primaryColor,
@@ -532,11 +499,10 @@ class BottomNavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-
-        return ListTile(
-          leading: icon,
-          title: text,
-          onTap: onTap,
-        );
+    return ListTile(
+      leading: icon,
+      title: text,
+      onTap: onTap,
+    );
   }
 }
