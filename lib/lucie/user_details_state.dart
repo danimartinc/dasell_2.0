@@ -1,3 +1,4 @@
+import 'package:DaSell/lucie/widgets/delete_review_dialog.dart';
 import 'package:intl/intl.dart';
 
 import '../commons.dart';
@@ -141,6 +142,24 @@ abstract class SellerUserDetailsState extends State<SellerUserDetails> {
       var format = new DateFormat('d MMM, hh:mm a');
       var date = new DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
       return format.format(date);
+  }
+
+    void onDeleteReviewDialogPressed() {
+    showDialog(
+      context: context,
+      builder: (context) => DeleteReviewDialog(
+        onSelect: deleteReview,
+      ),
+    );
+  }
+
+    Future<void> deleteReview( int option ) async {
+
+    if( option == 1 ) {
+    
+      
+  
+    }
   }
 
 

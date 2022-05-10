@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:DaSell/lucie/widgets/modal_options.dart';
+import 'package:DaSell/lucie/widgets/no_reviews_message.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
@@ -11,6 +12,7 @@ import 'package:DaSell/lucie/widgets/ads_by_seller.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../services/firebase/models/product_vo.dart';
+import 'widgets/delete_review_dialog.dart';
 import 'widgets/widgets.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -118,9 +120,12 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                       itemCount: userreview?.length,
                       itemBuilder: (context, index) {
 
-                        DateTime? reviewDate =  userreview?[index].date?.toDate() ?? null;
+                        if( userreview?.length == 0 ){
+                          return NoReviewsMessage();
+                        }
 
-                        String formatDate = DateFormat('dd-MM-yyyy').format( reviewDate! );
+                        DateTime? reviewDate =  userreview?[index].date?.toDate() ?? null;
+                        String formatDate = DateFormat('dd/MM/yyyy').format( reviewDate! );
                 
                         return Container(
                           color: Colors.grey.shade100,
@@ -131,7 +136,6 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: userreview?[index].reviewerPhoto == '' || userreview?[index].reviewerPhoto == null
-                                //name: doc.data()['name'] ?? ''
                                 ? CircleAvatar(
                                   radius: 25,
                                   child: SvgPicture.asset(
@@ -288,26 +292,56 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                                                 BottomNavigationMenu(
                                                                   icon: Icon(Icons.delete),
                                                                   text: Text('Eliminar opinión'), 
-                                                                  onTap: () async {   
+                                                                  onTap: () {  
+                                                                    showDialog(
+                                                                      context: context,
+                                                                      builder: (BuildContext context) { 
+                                                                        return AlertDialog(
+                                                                          title: Text('Eliminar opinión'),
+                                                                          content: Text('¿Está seguro de querer eliminar esta opinión? Se eliminará la opinión seleccionada'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              child: Text(
+                                                                                'Cerrar',
+                                                                                style: TextStyle(
+                                                                                  color: Theme.of(context).primaryColor,
+                                                                                ),
+                                                                              ),
+                                                                              onPressed: () => Navigator.of(context).pop(),
+                                                                            ),
+                                                                            ElevatedButton(
+                                                                              child: Text('Confirmar'),
+                                                                              onPressed: () async {
+                                                                                  var deleteData = userreview[index].toJson();
+                                                                                  userreview.removeAt(index);
 
-                                                                    var deleteData = userreview[index].toJson();
-                                                                    userreview.removeAt(index);
+                                                                                  double? average = await averageReview(userreview);
 
-                                                                    var average = await averageReview(userreview);
-                                                                    FirebaseService.get()
-                                                                        .firestore
-                                                                        .collection("users")
-                                                                        .doc( adUser?.uid )
-                                                                        .update(
-                                                                          {
-                                                                            "reviews": FieldValue.arrayRemove([deleteData]), "averageReview" : average
-                                                                          }
+                                                                                    if( userreview.length == 0 ){
+                                                                                        average = 0.0;
+                                                                                    }
+                                                                                  
+                                                                                  FirebaseService.get()
+                                                                                      .firestore
+                                                                                      .collection("users")
+                                                                                      .doc( adUser?.uid )
+                                                                                      .update(
+                                                                                        {
+                                                                                          "reviews": FieldValue.arrayRemove([deleteData]), "averageReview" : average
+                                                                                        }
+                                                                                      );
+
+                                                                          
+                                                                                      setState(() {});
+                                                                                  
+                                                                                Navigator.of(context).pop();
+                                                                              },
+                                                                            ),
+                                                                          ],
                                                                         );
-                                                                        
-                                                                        setState(() {});
-                                                                    },
-                                                                  ),
-                                          
+                                                                  }
+                                                                  );
+                                                                  })
                                                                 ],
                                                                 ),
                                                                 decoration: BoxDecoration(
@@ -486,6 +520,26 @@ class _SellerUserDetailsState extends SellerUserDetailsState
       ) : Container(),
     );
   }
+
+      void onDeleteReviewDialogPressed() {
+    showDialog(
+      context: context,
+      builder: (context) => DeleteReviewDialog(
+        onSelect: deleteReview,
+      ),
+    );
+  }
+
+    Future<void> deleteReview( int option ) async {
+
+    if( option == 1 ) {
+    
+      
+  
+    }
+  }
+
+  
 }
 
 class BottomNavigationMenu extends StatelessWidget {

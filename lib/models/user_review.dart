@@ -3,12 +3,12 @@ import '../commons.dart';
 class UserReview {
 
   
-  String reviewerName;
-  String reviewerPhoto;
-  double rating;
-  String comment;
-  String reviewerid;
-  String commentid;
+  final String reviewerName;
+  final String reviewerPhoto;
+  final double rating;
+  final String comment;
+  final String reviewerid;
+  final String commentid;
   final Timestamp? date;
 
   UserReview({
@@ -32,9 +32,8 @@ class UserReview {
       rating: json["rating"].toDouble(),
       comment: json["comment"],
       date: json["date"],
-        reviewerid: json["reviewerid"],
+      reviewerid: json["reviewerid"],
       commentid: json["commentid"]
-
     );
   }
   

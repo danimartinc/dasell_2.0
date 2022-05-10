@@ -139,9 +139,7 @@ abstract class ProductDetailsState extends State<ProductDetails> {
   }
 
   void onChatTap() {
-    trace("PUSH CHAT SCREEN 2");
     context.push(ChatRoomScreen(user: adUser!));
-    trace("User  ${ adUser } ");
     //     () => Navigator.of(context.pushNamed(
     //   ChatScreen.routeName,
     //   arguments: userData,
