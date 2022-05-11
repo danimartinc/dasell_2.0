@@ -9,6 +9,7 @@ abstract class UsersChatController extends State<UsersChatScreen> {
 
   User? get myUser => FirebaseAuth.instance.currentUser!;
   late StreamSubscription chatStreamSub;
+  late StreamSubscription chatInitStreamSub;
   List<ChatViewItemVo> dataItems = [];
 
   final _service = FirebaseService.get();
@@ -19,12 +20,15 @@ abstract class UsersChatController extends State<UsersChatScreen> {
     chatStreamSub = _service.subscribeToMyChats(onChatDataChange);
     //TODO: NO LISTA NINGÚN CHAT, NO SE SI HACE RELOAD
     //chatStreamSub = _service.subscribeToChats(onChatDataChange);
+
+    chatInitStreamSub = _service.subscribeToMyChats( onChatDataChangeFirst );
     super.initState();
   }
 
   @override
   void dispose() {
     chatStreamSub.cancel();
+     chatInitStreamSub.cancel();
     super.dispose();
   }
 
@@ -34,6 +38,14 @@ abstract class UsersChatController extends State<UsersChatScreen> {
     final chatRooms = event.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList();
     dataItems = await _service.getUserChats(chatRooms);
     update();
+  }
+
+  Future<List<ChatRoomVo>> onChatDataChangeFirst( QuerySnapshot<Map<String, dynamic>>? event ) async {
+
+    final chatRooms = event!.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList();
+    dataItems = await _service.getUserChats(chatRooms);
+
+    return chatRooms;
   }
 
   /// Item on tap.

@@ -31,7 +31,7 @@ const kNoProductsWhiteStyle = TextStyle(color: Colors.white);
 
 
 const bookButtonTextStyle = TextStyle(
-    color: Colors.white,
+    color: Colors.red,
     fontSize: 20,
     fontWeight: FontWeight.w500,
     letterSpacing: 1.1,

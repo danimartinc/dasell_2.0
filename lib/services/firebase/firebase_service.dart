@@ -219,21 +219,7 @@ class FirebaseService {
 
   Future<List<ChatViewItemVo>> getUserChats(List<ChatRoomVo> chatRooms) async {
     var uids = chatRooms.map((e) => e.getOtherUserId(uid)).toList();
-    // var chatIds = chatRooms.map((e) => e.docId).toList();
-    // trace('-----');
-    // trace(chatIds);
-    // trace(uid);
-    // trace('-----');
-    // var a = await firestore
-    //     .collection('chats')
-    //     .where('docId', whereIn: chatIds).
-    //     .where(
-    //       FieldPath(['messages', 'isRead']),
-    //       isEqualTo: false,
-    //     )
-    //     .get();
-    // trace("A is: ", a.size);
-
+  
     await cacheMissingUsers(uids);
     final result = <ChatViewItemVo>[];
     for (var room in chatRooms) {

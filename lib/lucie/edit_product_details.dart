@@ -203,6 +203,7 @@ class _EditProductDetails extends EditProductState {
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
                     ),
+                    primary: Theme.of(context).primaryColor,
                   ),  
                   //shape: StadiumBorder(),
                   child: Container(

@@ -1,8 +1,7 @@
-import 'dart:convert';
 
-import 'package:DaSell/lucie/widgets/modal_options.dart';
+
 import 'package:DaSell/lucie/widgets/no_reviews_message.dart';
-import 'package:intl/date_symbol_data_local.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 import '../commons.dart';
@@ -14,7 +13,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../services/firebase/models/product_vo.dart';
 import 'widgets/delete_review_dialog.dart';
 import 'widgets/widgets.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 
 class SellerUserDetails extends StatefulWidget {
@@ -116,13 +114,9 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                     : Container(),
                 //Container(color: Colors.green,),
                 Container(
-                  child: ListView.builder(
+                  child: userreview?.length == 0  ? NoReviewsMessage() : ListView.builder(
                       itemCount: userreview?.length,
                       itemBuilder: (context, index) {
-
-                        if( userreview?.length == 0 ){
-                          return NoReviewsMessage();
-                        }
 
                         DateTime? reviewDate =  userreview?[index].date?.toDate() ?? null;
                         String formatDate = DateFormat('dd/MM/yyyy').format( reviewDate! );
@@ -265,6 +259,7 @@ class _SellerUserDetailsState extends SellerUserDetailsState
 
                                                                                       });
                                                                                       context.pop();
+                                                                                      showEditReviewToast();
 
                                                                                     },
                                                                                     child: Container(
@@ -335,6 +330,8 @@ class _SellerUserDetailsState extends SellerUserDetailsState
                                                                                       setState(() {});
                                                                                   
                                                                                 Navigator.of(context).pop();
+
+                                                                                showDeleteReviewToast();
                                                                               },
                                                                             ),
                                                                           ],
@@ -521,24 +518,23 @@ class _SellerUserDetailsState extends SellerUserDetailsState
     );
   }
 
-      void onDeleteReviewDialogPressed() {
-    showDialog(
-      context: context,
-      builder: (context) => DeleteReviewDialog(
-        onSelect: deleteReview,
-      ),
-    );
-  }
+  void showDeleteReviewToast() => Fluttertoast.showToast(
+    msg: 'Opinión eliminada',
+    fontSize: 15,
+    gravity: ToastGravity.BOTTOM,
+    backgroundColor: Colors.black54,
+    textColor: Colors.white,
+  );
 
-    Future<void> deleteReview( int option ) async {
+  void showEditReviewToast() => Fluttertoast.showToast(
+    msg: 'El contenido ha sido modificado',
+    fontSize: 15,
+    gravity: ToastGravity.BOTTOM,
+    backgroundColor: Colors.black54,
+    textColor: Colors.white,
+  );
 
-    if( option == 1 ) {
-    
-      
   
-    }
-  }
-
   
 }
 

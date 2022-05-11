@@ -19,7 +19,8 @@ class NoReviewsMessage extends StatelessWidget {
             style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 18)  
           ),
           kGap20,
-          Text('Después de una transacción pide que te valoren.Las opiniones inspiran confianza.'),
+          Text( 'Después de una transacción pide que te valoren.',textAlign: TextAlign.center, ),
+          Text( 'Las opiniones inspiran confianza.',textAlign: TextAlign.center, ),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Row(

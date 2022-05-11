@@ -145,7 +145,7 @@ class _AddingImagesScreenState extends AddingImagesScreenState {
                     ),
                   ),
                 ),
-                Positioned(
+                /*Positioned(
                   child: const OpacityTween(
                     child: SlideUpTween(
                       begin: Offset(-30, 60),
@@ -157,7 +157,7 @@ class _AddingImagesScreenState extends AddingImagesScreenState {
                       ),
                     ),
                   ),
-                ),     
+                ), */    
           ],
         ),
         ],

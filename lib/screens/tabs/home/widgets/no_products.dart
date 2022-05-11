@@ -55,7 +55,7 @@ class NoProducts extends StatelessWidget {
           MaterialButton(
             // minWidth: width - 180,
             child: Text('Subir producto', style: kNoProductsWhiteStyle),
-            color: Colors.indigo,
+            color: Theme.of(context).primaryColor,
             //Redondeamos los bordes del botón
             shape: StadiumBorder(),
             elevation: 0,

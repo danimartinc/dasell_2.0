@@ -16,6 +16,7 @@ class NextScreenButton extends StatelessWidget {
           shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0),
           ),
+          primary: Theme.of(context).primaryColor,
         ),  
         //shape: StadiumBorder(),
         child: Container(

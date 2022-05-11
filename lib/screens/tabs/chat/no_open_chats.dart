@@ -1,8 +1,8 @@
 import '../../../commons.dart';
 
-class SearchAdsBtn extends StatelessWidget {
+class NoOpenChats extends StatelessWidget {
 
-  const SearchAdsBtn({Key? key}) : super(key: key);
+  const NoOpenChats({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +15,17 @@ class SearchAdsBtn extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'No hay productos añadidos como favoritos',
+            'Sin mensajes todavía',
             style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 18)  
           ),
           kGap20,
-          Text('Productos que te gustan'),
-          Text('Para guardar un producto, pulsa el icono de producto favorito'),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon( FontAwesomeIcons.heart ),
-              ],
-            ),
-          ),
+          Text('Chatear con los demás puedeser el comienzo de una transacción.'),
+          Text('Encuentra algo que te guste y empieza una conversación.'),
+
           kGap30,
           MaterialButton(
             minWidth: width - 180,
-            child: Text('Buscar producto', style: TextStyle( color: Colors.white ) ),
+            child: Text('Buscar en DaSell', style: TextStyle( color: Colors.white ) ),
             color: Theme.of(context).primaryColor,
             //Redondeamos los bordes del botón
             shape: StadiumBorder(),

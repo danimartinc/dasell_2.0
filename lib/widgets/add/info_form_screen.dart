@@ -142,6 +142,8 @@ class _ProductInfoFormState extends InfoFormScreenState {
                       ),
                     ),
                     Slider.adaptive(
+                      activeColor: Theme.of(context).primaryColor,
+                      //inactiveColor: Theme.of(context).primaryColor,
                       value: sliderValue!,
                       min: 0,
                       max: 100,

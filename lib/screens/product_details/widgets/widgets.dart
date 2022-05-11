@@ -41,7 +41,7 @@ class ProductCategoryButtons extends StatelessWidget {
     final child = categories.map((e) {
       return MaterialButton(
           child: Text(e, style: TextStyle(color: Colors.white)),
-          color: Colors.indigo,
+          color: Theme.of(context).primaryColor,
           shape: StadiumBorder(),
           elevation: 0,
           splashColor: Colors.transparent,
