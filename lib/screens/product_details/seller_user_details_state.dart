@@ -1,11 +1,13 @@
-import 'package:DaSell/lucie/widgets/delete_review_dialog.dart';
+
 import 'package:intl/intl.dart';
 
-import '../commons.dart';
 import 'dart:async';
 
-import 'package:DaSell/lucie/seller_user_details.dart';
-import '../services/firebase/models/product_vo.dart';
+import '../../commons.dart';
+import '../../services/firebase/models/product_vo.dart';
+import 'seller_user_details.dart';
+import 'widgets/delete_review_dialog.dart';
+
 
 abstract class SellerUserDetailsState extends State<SellerUserDetails> {
 

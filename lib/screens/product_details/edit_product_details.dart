@@ -1,12 +1,10 @@
-import '../commons.dart';
-
-import '../services/firebase/models/product_vo.dart';
-import '../widgets/add/widgets/change_category.dart';
-import '../widgets/add/widgets/change_subcategory.dart';
+import '../../commons.dart';
+import '../../services/firebase/models/product_vo.dart';
 import 'edit_product_details_state.dart';
 
 
 class EditProductDetails extends StatefulWidget {
+  
   final ResponseProductVo data;
 
   const EditProductDetails({

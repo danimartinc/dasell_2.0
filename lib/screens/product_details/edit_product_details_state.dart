@@ -1,11 +1,12 @@
-import '../commons.dart';
-
 import 'dart:async';
 
 
 import 'package:DaSell/models/edit_product.dart';
-import 'package:DaSell/lucie/edit_product_details.dart';
-import '../services/firebase/models/product_vo.dart';
+
+import '../../commons.dart';
+import '../../services/firebase/models/product_vo.dart';
+import 'edit_product_details.dart';
+
 
 abstract class EditProductState extends State<EditProductDetails> {
 

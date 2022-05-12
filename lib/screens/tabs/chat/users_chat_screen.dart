@@ -12,12 +12,7 @@ class UsersChatScreen extends StatefulWidget {
   createState() => _UsersChatScreenState();
 }
 
-class _UsersChatScreenState extends UsersChatController {
-
-    final _service = FirebaseService.get();
-
-      
-    
+class _UsersChatScreenState extends UsersChatController {    
   @override
   Widget build(BuildContext context) {
 
@@ -26,7 +21,7 @@ class _UsersChatScreenState extends UsersChatController {
         title: Text('Chats', style: kAppbarTitleStyle),
       ),
       body: FutureBuilder(
-        //future: onChatDataChangeFirst( dataItems ),
+        future: onChatDataChangeFirst(),
         builder: ( context, __ ){
           
           return dataItems.isEmpty ? NoOpenChats() : ListView.builder(

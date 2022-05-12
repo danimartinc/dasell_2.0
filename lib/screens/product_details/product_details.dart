@@ -1,12 +1,12 @@
 import 'package:DaSell/commons.dart';
-import 'package:DaSell/lucie/edit_product_details.dart';
-import 'package:DaSell/lucie/seller_user_details.dart';
 import 'package:DaSell/services/firebase/models/product_vo.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import 'edit_product_details.dart';
 import 'product_details_state.dart';
+import 'seller_user_details.dart';
 import 'widgets/action_button.dart';
 import 'widgets/image_slider.dart';
 import 'widgets/widgets.dart';

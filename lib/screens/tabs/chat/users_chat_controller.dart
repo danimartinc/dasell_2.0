@@ -9,7 +9,7 @@ abstract class UsersChatController extends State<UsersChatScreen> {
 
   User? get myUser => FirebaseAuth.instance.currentUser!;
   late StreamSubscription chatStreamSub;
-  late StreamSubscription chatInitStreamSub;
+  //late StreamSubscription chatInitStreamSub;
   List<ChatViewItemVo> dataItems = [];
 
   final _service = FirebaseService.get();
@@ -21,14 +21,14 @@ abstract class UsersChatController extends State<UsersChatScreen> {
     //TODO: NO LISTA NINGÚN CHAT, NO SE SI HACE RELOAD
     //chatStreamSub = _service.subscribeToChats(onChatDataChange);
 
-    chatInitStreamSub = _service.subscribeToMyChats( onChatDataChangeFirst );
+    //chatInitStreamSub = _service.subscribeToMyChats( onChatDataChangeFirst );
     super.initState();
   }
 
   @override
   void dispose() {
     chatStreamSub.cancel();
-     chatInitStreamSub.cancel();
+     //chatInitStreamSub.cancel();
     super.dispose();
   }
 
@@ -36,16 +36,24 @@ abstract class UsersChatController extends State<UsersChatScreen> {
     QuerySnapshot<Map<String, dynamic>> event,
   ) async {
     final chatRooms = event.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList();
+
+    trace('ChatRooms $chatRooms');
     dataItems = await _service.getUserChats(chatRooms);
+    trace('dataItems $dataItems');
     update();
   }
 
-  Future<List<ChatRoomVo>> onChatDataChangeFirst( QuerySnapshot<Map<String, dynamic>>? event ) async {
+  Future<List<ChatViewItemVo>> onChatDataChangeFirst(  ) async {
 
-    final chatRooms = event!.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList();
-    dataItems = await _service.getUserChats(chatRooms);
+    QuerySnapshot<Map<String, dynamic>>? event;
 
-    return chatRooms;
+    final List<ChatRoomVo>? chatRooms = event?.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList() ?? [];
+    
+    trace('ChatRooms2 $chatRooms');
+    List<ChatViewItemVo>? dataItems = await _service.getUserChats(chatRooms!);
+    trace('dataItems2 $dataItems');
+
+    return dataItems;
   }
 
   /// Item on tap.

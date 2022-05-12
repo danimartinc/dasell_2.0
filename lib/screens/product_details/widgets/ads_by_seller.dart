@@ -1,9 +1,10 @@
 import 'package:DaSell/screens/favs/my_ads_state.dart';
 
-import '../../commons.dart';
+
 //Widgets
-import '../../screens/tabs/home/widgets/ad_item_widget.dart';
-import '../../services/firebase/models/product_vo.dart';
+import '../../../commons.dart';
+import '../../../services/firebase/models/product_vo.dart';
+import '../../tabs/home/widgets/ad_item_widget.dart';
 
 
 

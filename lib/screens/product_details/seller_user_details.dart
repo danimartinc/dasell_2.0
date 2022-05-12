@@ -1,21 +1,16 @@
-
-
-import 'package:DaSell/lucie/widgets/no_reviews_message.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
-import '../commons.dart';
-
-import 'package:DaSell/lucie/user_details_state.dart';
-import 'package:DaSell/lucie/widgets/ads_by_seller.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import '../services/firebase/models/product_vo.dart';
-import 'widgets/delete_review_dialog.dart';
+import '../../commons.dart';
+import '../../services/firebase/models/product_vo.dart';
+import 'widgets/ads_by_seller.dart';
+import 'widgets/no_reviews_message.dart';
 import 'widgets/widgets.dart';
-
+import 'seller_user_details_state.dart';
 
 class SellerUserDetails extends StatefulWidget {
+  
   final ResponseProductVo data;
 
   static const routeName = './user_details';
@@ -26,13 +21,12 @@ class SellerUserDetails extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  createState() => _SellerUserDetailsState();
+  createState() => _SellerUserDetails();
 }
 
-class _SellerUserDetailsState extends SellerUserDetailsState
-    with SingleTickerProviderStateMixin {
-  late TabController _controller;
+class _SellerUserDetails extends SellerUserDetailsState with SingleTickerProviderStateMixin {
 
+  late TabController _controller;
   final commentController = new TextEditingController();
 
   @override

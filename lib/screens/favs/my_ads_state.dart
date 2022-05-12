@@ -1,10 +1,10 @@
-import 'package:DaSell/lucie/widgets/ads_by_seller.dart';
 import 'package:DaSell/screens/favs/my_ads_screen.dart';
 import 'package:DaSell/screens/favs/my_sell_ads_screen.dart';
 
 import '../../commons.dart';
 import '../../services/firebase/models/product_vo.dart';
 import '../product_details/product_details.dart';
+import '../product_details/widgets/ads_by_seller.dart';
 import 'favorite_ads_screen.dart';
 
 abstract class MyAdsScreenState extends State<MyAds> {
