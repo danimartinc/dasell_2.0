@@ -26,6 +26,12 @@ class _EditProductDetails extends EditProductState {
 
   @override
   Widget build(BuildContext context) {
+
+      //final _service = DataService.get();
+     // var cats = Categories.categories;
+      //String? _myState;
+      //String? _myCity;
+      
     return Scaffold(
       appBar: AppBar(
          title: Text('Editar publicación'),
@@ -110,8 +116,8 @@ class _EditProductDetails extends EditProductState {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        //ChangeCategory(),
-                       // ChangeSubcategory(),
+                       // ChangeCategory(),
+                       //ChangeSubcategory(),
                         Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 10,
@@ -120,6 +126,45 @@ class _EditProductDetails extends EditProductState {
                         ),
                       ],
                     ),
+                    TextFormField(
+                      controller: CategoryController,
+                      key: ValueKey('category'),
+                      /*onChanged: (value) {
+                        if ( prevValue.length > value.length) {
+                          setState(() {
+                            counterText--;
+                          });
+                        } else {
+                          setState(() {
+                            counterText++;
+                          });
+                        }
+                         prevValue = value;
+                      },
+                      validator: (value) {
+                        if (value!.length > 15) {
+                          return null;
+                        } else {
+                          return 'La descripción debe contener al menos 20 caracteres';
+                        }
+                      },*/
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'Categoría y subcategoría',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      onSaved: (newValue) {
+                        desc = newValue!;
+                      },
+                      //maxLength: 600,
+                    ),  
                     Divider(),                    
 
                     AnimatedContainer(
@@ -182,14 +227,99 @@ class _EditProductDetails extends EditProductState {
                   ],
                 ),
               ),
-            ),    
+            ),  
+                     
 
-          TextFormField(
+         /* TextFormField(
             controller: CategoryController,
             decoration: InputDecoration(
               hintText: "Enter title",
             ),
+          ),*/
+
+                  //======================================================== State
+
+        /*  Container(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 5),
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Expanded(
+                  child: DropdownButtonHideUnderline(
+                    child: ButtonTheme(
+                      alignedDropdown: true,
+                      child: DropdownButton<String>(
+                        value: _myState,
+                        iconSize: 30,
+                        icon: (null),
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 16,
+                        ),
+                        hint: Text('Select State'),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _myState = newValue;
+                            _service..init();
+                            print(_myState);
+                          });
+                        },
+                        items: homeCategories as List<DropdownMenuItem<String>>?
+                       /* .map((item) {
+                              return new DropdownMenuItem(
+                                child: new Text('sdas'),
+                                value: item['id'].toString(),
+                              );
+                            }).toList() ??
+                            [],*/
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
+          SizedBox(
+            height: 30,
+          ),
+
+          //======================================================== City
+
+          Container(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 5),
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Expanded(
+                  child: DropdownButtonHideUnderline(
+                    child: ButtonTheme(
+                      alignedDropdown: true,
+                      child: DropdownButton<String>(
+                        value: _myCity,
+                        iconSize: 30,
+                        icon: (null),
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 16,
+                        ),
+                        hint: Text('Select City'),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _service.init();
+                            print(_myCity);
+                          });
+                        },
+                        items: homeCategories as List<DropdownMenuItem<String>>
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),*/
+     
 
           InkWell(
             onTap: (){},

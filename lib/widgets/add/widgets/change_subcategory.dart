@@ -39,7 +39,6 @@ class ChangeSubcategory extends StatelessWidget {
         ),
       ),
       trailing: Icon( Icons.chevron_right_rounded ),
-      // leading: Icon( iconMapping[icon], color: HexColor(color) ),
     );
   }
 }
