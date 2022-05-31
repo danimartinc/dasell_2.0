@@ -216,10 +216,10 @@ class _NewMessageState extends State<NewMessage> {
       backspaceColor: Colors.blue,
       showRecentsTab: true,
       recentsLimit: 28,
-      noRecentsText: 'No Recientes',
-      noRecentsStyle: const TextStyle(
+      noRecents: DefaultNoRecentsWidget,
+      /*noRecentsStyle: const TextStyle(
         fontSize: 20, color: Colors.black26
-      ),
+      ),*/
       tabIndicatorAnimDuration: kTabScrollDuration,
       categoryIcons: const CategoryIcons(),
       buttonMode: ButtonMode.MATERIAL
