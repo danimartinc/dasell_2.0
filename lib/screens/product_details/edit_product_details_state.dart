@@ -53,8 +53,8 @@ abstract class EditProductState extends State<EditProductDetails> {
     TitleController.text = postModel.title!;
     DescriptionController.text = postModel.description!;
     PriceController.text = postModel.price.toString();
-    CategoryController.text = cat;
-    //SubcategoryController = data.
+    CategoryController.text = postModel.categories as String;
+    //SubcategoryController.text = data;
   }
 
   Future<void> updateData() async{
@@ -208,6 +208,21 @@ abstract class EditProductState extends State<EditProductDetails> {
     final icon = e['icon'] as IconData;
     return CategoryItemVo(name, icon);
   }).toList(growable: false);
+
+  List<String> getsubCategories( String? category ){
+    if(category==null) return [];
+   return  categories[categories.indexWhere((map) => map['category'] == category)]['further'];
+
+  }
+  
+
+
+ /* List<CategoryItemVo> homeSubCategories = categories.map((e) {
+    final name = e['further'] as String;
+    final icon = e['icon'] as IconData;
+    return CategoryItemVo(name, icon);
+  }).toList(growable: false);*/
+
 
   static const List<Map<String, dynamic>> categories = [
     {

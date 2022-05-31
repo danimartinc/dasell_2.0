@@ -17,6 +17,8 @@ class EditProductDetails extends StatefulWidget {
 }
 
 class _EditProductDetails extends EditProductState {
+     String? _myCategory;
+      String? _mySubCategory;
   
 
   @override
@@ -27,10 +29,7 @@ class _EditProductDetails extends EditProductState {
   @override
   Widget build(BuildContext context) {
 
-      //final _service = DataService.get();
-     // var cats = Categories.categories;
-      //String? _myState;
-      //String? _myCity;
+   
       
     return Scaffold(
       appBar: AppBar(
@@ -239,7 +238,7 @@ class _EditProductDetails extends EditProductState {
 
                   //======================================================== State
 
-        /*  Container(
+        Container(
             padding: EdgeInsets.only(left: 15, right: 15, top: 5),
             color: Colors.white,
             child: Row(
@@ -250,29 +249,27 @@ class _EditProductDetails extends EditProductState {
                     child: ButtonTheme(
                       alignedDropdown: true,
                       child: DropdownButton<String>(
-                        value: _myState,
+                        value: _myCategory,
                         iconSize: 30,
                         icon: (null),
                         style: TextStyle(
                           color: Colors.black54,
                           fontSize: 16,
                         ),
-                        hint: Text('Select State'),
+                        hint: Text('Seleccionar categoría'),
                         onChanged: (String? newValue) {
                           setState(() {
-                            _myState = newValue;
-                            _service..init();
-                            print(_myState);
+                            _myCategory = newValue;
+                           // _service..init();
+                            print( _myCategory );
                           });
                         },
-                        items: homeCategories as List<DropdownMenuItem<String>>?
-                       /* .map((item) {
-                              return new DropdownMenuItem(
-                                child: new Text('sdas'),
-                                value: item['id'].toString(),
-                              );
-                            }).toList() ??
-                            [],*/
+                        items: homeCategories.map((item) {
+                          return new DropdownMenuItem<String>(
+                            child: new Text( item.name ),
+                            value: item.name,
+                          );
+                        }).toList()
                       ),
                     ),
                   ),
@@ -284,7 +281,7 @@ class _EditProductDetails extends EditProductState {
             height: 30,
           ),
 
-          //======================================================== City
+          //======================================================== SubCategoría
 
           Container(
             padding: EdgeInsets.only(left: 15, right: 15, top: 5),
@@ -297,28 +294,34 @@ class _EditProductDetails extends EditProductState {
                     child: ButtonTheme(
                       alignedDropdown: true,
                       child: DropdownButton<String>(
-                        value: _myCity,
+                        value: _mySubCategory,
                         iconSize: 30,
                         icon: (null),
                         style: TextStyle(
                           color: Colors.black54,
                           fontSize: 16,
                         ),
-                        hint: Text('Select City'),
+                        hint: Text('Seleccionar subcategoría'),
                         onChanged: (String? newValue) {
                           setState(() {
-                            _service.init();
-                            print(_myCity);
+                               _mySubCategory = newValue;
+                           // _service.init();
+                            print(_mySubCategory);
                           });
                         },
-                        items: homeCategories as List<DropdownMenuItem<String>>
+                        items: getsubCategories( _myCategory ).map((item) {
+                              return new DropdownMenuItem<String>(
+                                child: new Text( item ),
+                                value: item,
+                              );
+                            }).toList()
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-          ),*/
+          ),
      
 
           InkWell(
