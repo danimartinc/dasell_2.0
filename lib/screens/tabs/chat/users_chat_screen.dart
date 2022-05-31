@@ -1,6 +1,7 @@
 import 'package:DaSell/commons.dart';
 import 'package:DaSell/screens/tabs/chat/no_open_chats.dart';
 
+import 'models.dart';
 import 'users_chat_controller.dart';
 import 'widgets.dart';
 
@@ -20,21 +21,35 @@ class _UsersChatScreenState extends UsersChatController {
       appBar: AppBar(
         title: Text('Chats', style: kAppbarTitleStyle),
       ),
-      body: FutureBuilder(
-        future: onChatDataChangeFirst(),
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: service.streamSubscribeToChats(),
         builder: ( context, __ ){
-          
-          return dataItems.isEmpty ? NoOpenChats() : ListView.builder(
-            itemCount: dataItems.length,
-            itemBuilder: (context, index) {
+          if(__.hasData) {
+            return FutureBuilder<List<ChatViewItemVo>>(
+              future: onChatDataChangeFirst(__.data!),
+              builder: (context, snapshot) {
+                if(snapshot.hasData) {
+                  return snapshot.data!.isEmpty ? NoOpenChats() : ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
 
-              return ChatRoomItem(
-                data: dataItems[index],
-                onTap: () => onItemTap(dataItems[index]),
-              );
-            }
+                        return ChatRoomItem(
+                          data: snapshot.data![index],
+                          onTap: () => onItemTap(snapshot.data![index]),
+                        );
+                      }
 
-          );
+                  );
+                }
+                return CommonProgress();
+              },
+            );
+          }
+          if(__.hasError) {
+            print(__.error.toString());
+            print(__.stackTrace.toString());
+          }
+          return CommonProgress();
         })
 
 

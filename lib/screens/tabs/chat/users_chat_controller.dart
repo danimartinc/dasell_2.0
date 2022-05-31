@@ -36,28 +36,19 @@ abstract class UsersChatController extends State<UsersChatScreen> {
     QuerySnapshot<Map<String, dynamic>> event,
   ) async {
     final chatRooms = event.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList();
-
-    trace('ChatRooms $chatRooms');
     dataItems = await _service.getUserChats(chatRooms);
-    trace('dataItems $dataItems');
     update();
   }
 
-  Future<List<ChatViewItemVo>> onChatDataChangeFirst(  ) async {
-
-    QuerySnapshot<Map<String, dynamic>>? event;
-
-    final List<ChatRoomVo>? chatRooms = event?.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList() ?? [];
-    
-    trace('ChatRooms2 $chatRooms');
-    List<ChatViewItemVo>? dataItems = await _service.getUserChats(chatRooms!);
-    trace('dataItems2 $dataItems');
-
-    return dataItems;
+  Future<List<ChatViewItemVo>> onChatDataChangeFirst(QuerySnapshot<Map<String, dynamic>> event  ) async {
+    final chatRooms = event.docs.map((e) => ChatRoomVo.fromJson(e.data())).toList();
+    return await _service.getUserChats(chatRooms);
   }
 
   /// Item on tap.
   Future<void> onItemTap(ChatViewItemVo item) async {
     await context.push(ChatRoomScreen(user: item.receiver));
   }
+
+  FirebaseService get service => _service;
 }

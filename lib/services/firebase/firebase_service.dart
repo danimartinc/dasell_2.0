@@ -119,6 +119,15 @@ class FirebaseService {
     return stream.listen(onData);
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamSubscribeToChats() {
+    final stream = FirebaseFirestore.instance
+        .collection('chats')
+        .where('users', arrayContains: '$uid')
+        .orderBy('timeStamp', descending: true)
+        .snapshots();
+    return stream;
+  }
+
   // QueryStreamDataCallback
   StreamSubscription subscribeToMyChats(QueryStreamDataCallback onData) {
     final stream = FirebaseFirestore.instance
