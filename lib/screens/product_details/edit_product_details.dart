@@ -17,9 +17,8 @@ class EditProductDetails extends StatefulWidget {
 }
 
 class _EditProductDetails extends EditProductState {
-     String? _myCategory;
-      String? _mySubCategory;
-  
+
+
 
   @override
   void initState() {
@@ -28,9 +27,7 @@ class _EditProductDetails extends EditProductState {
 
   @override
   Widget build(BuildContext context) {
-
-   
-      
+          
     return Scaffold(
       appBar: AppBar(
          title: Text('Editar publicación'),
@@ -115,8 +112,6 @@ class _EditProductDetails extends EditProductState {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                       // ChangeCategory(),
-                       //ChangeSubcategory(),
                         Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 10,
@@ -125,47 +120,86 @@ class _EditProductDetails extends EditProductState {
                         ),
                       ],
                     ),
-                    TextFormField(
-                      controller: CategoryController,
-                      key: ValueKey('category'),
-                      /*onChanged: (value) {
-                        if ( prevValue.length > value.length) {
-                          setState(() {
-                            counterText--;
-                          });
-                        } else {
-                          setState(() {
-                            counterText++;
-                          });
-                        }
-                         prevValue = value;
-                      },
-                      validator: (value) {
-                        if (value!.length > 15) {
-                          return null;
-                        } else {
-                          return 'La descripción debe contener al menos 20 caracteres';
-                        }
-                      },*/
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 3,
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'Categoría y subcategoría',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                          ),
+                    Container(
+                        padding: EdgeInsets.only(left: 15, right: 15, top: 5),
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              child: DropdownButtonHideUnderline(
+                                child: ButtonTheme(
+                                  alignedDropdown: true,
+                                  child: DropdownButton<String>(
+                                    value: myCategory,
+                                    iconSize: 30,
+                                    icon: (null),
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 16,
+                                    ),
+                                    hint: Text('${data.categories![0]}'),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        myCategory = newValue;
+                                        print( myCategory );
+                                      });
+                                    },
+                                    items: homeCategories.map((item) {
+                                      return new DropdownMenuItem<String>(
+                                        child: new Text( item.name ),
+                                        value: item.name,
+                                      );
+                                    }).toList()
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      onSaved: (newValue) {
-                        desc = newValue!;
-                      },
-                      //maxLength: 600,
-                    ),  
-                    Divider(),                    
-
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 15, right: 15, top: 5),
+                        color: Colors.white,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              child: DropdownButtonHideUnderline(
+                                child: ButtonTheme(
+                                  alignedDropdown: true,
+                                  child: DropdownButton<String>(
+                                    value: mySubCategory,
+                                    iconSize: 30,
+                                    icon: (null),
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 16,
+                                    ),
+                                    hint: Text('${data.categories![1]}'),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        mySubCategory = newValue;
+                                        print(mySubCategory);
+                                      });
+                                    },
+                                    items: getsubCategories( myCategory ).map( (item) {
+                                            return new DropdownMenuItem<String>(
+                                              child: new Text( item ),
+                                              value: item,
+                                            );
+                                          }).toList()
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),             
+                    Divider(),     
                     AnimatedContainer(
                       duration: Duration(milliseconds: 300),
                       height: containerHeight,
@@ -185,7 +219,6 @@ class _EditProductDetails extends EditProductState {
                         ),
                       ),
                     ),
-
                     SwitchListTile.adaptive(
                       title: Text(
                         'Hago envíos',
@@ -227,103 +260,6 @@ class _EditProductDetails extends EditProductState {
                 ),
               ),
             ),  
-                     
-
-         /* TextFormField(
-            controller: CategoryController,
-            decoration: InputDecoration(
-              hintText: "Enter title",
-            ),
-          ),*/
-
-                  //======================================================== State
-
-        Container(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 5),
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: DropdownButtonHideUnderline(
-                    child: ButtonTheme(
-                      alignedDropdown: true,
-                      child: DropdownButton<String>(
-                        value: _myCategory,
-                        iconSize: 30,
-                        icon: (null),
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                        ),
-                        hint: Text('Seleccionar categoría'),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _myCategory = newValue;
-                           // _service..init();
-                            print( _myCategory );
-                          });
-                        },
-                        items: homeCategories.map((item) {
-                          return new DropdownMenuItem<String>(
-                            child: new Text( item.name ),
-                            value: item.name,
-                          );
-                        }).toList()
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-
-          //======================================================== SubCategoría
-
-          Container(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 5),
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: DropdownButtonHideUnderline(
-                    child: ButtonTheme(
-                      alignedDropdown: true,
-                      child: DropdownButton<String>(
-                        value: _mySubCategory,
-                        iconSize: 30,
-                        icon: (null),
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 16,
-                        ),
-                        hint: Text('Seleccionar subcategoría'),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                               _mySubCategory = newValue;
-                           // _service.init();
-                            print(_mySubCategory);
-                          });
-                        },
-                        items: getsubCategories( _myCategory ).map((item) {
-                              return new DropdownMenuItem<String>(
-                                child: new Text( item ),
-                                value: item,
-                              );
-                            }).toList()
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-     
-
           InkWell(
             onTap: (){},
             child: Container(
@@ -342,10 +278,8 @@ class _EditProductDetails extends EditProductState {
                     height: 55,
                     child: Center(
                       child: Text('Actualizar publicación',),
-                      //child: Text( this.text , style: TextStyle( color: Colors.white, fontSize: 17 )),
                     ),
                   ),
-                  // Icons.arrow_forward, 
                   onPressed: (){
                     updateData();
                   },

@@ -23,15 +23,15 @@ abstract class EditProductState extends State<EditProductDetails> {
   final DescriptionController = TextEditingController();
   final PriceController = TextEditingController();
   final CategoryController = TextEditingController();
-  final SubcategoryController = TextEditingController();
+  final MakeShipmentsController = TextEditingController();
 
   final double? containerHeight = 80;
-
-
+  String? myCategory;
+  String? mySubCategory;
+  
 
   @override
   void initState() {
-
     _loadData();
     super.initState();
   }
@@ -43,31 +43,22 @@ abstract class EditProductState extends State<EditProductDetails> {
     adUser = await _firebaseService.getUser(data.uid!);
     EditProduct postModel = await _firebaseService.getPostData(data.id.toString());
 
-    print(postModel.toJson());
-
-    String cat = "";
-    postModel.categories?.forEach((element) {
-      cat = cat + element + ',';
-    });
+    trace('JSON ${postModel.toJson()}');
 
     TitleController.text = postModel.title!;
     DescriptionController.text = postModel.description!;
     PriceController.text = postModel.price.toString();
-    CategoryController.text = cat;
-    //SubcategoryController = data.
+    CategoryController.text = postModel.categories.toString();
   }
 
   Future<void> updateData() async{
-
-    List<String> cat = [];
-
-    cat = CategoryController.text.split(',').toList();
 
     Map<String,dynamic> postdata = {
       "title": TitleController.text,
       "description": DescriptionController.text,
       "price": double.parse(PriceController.text),
-      "categories": cat
+      "categories": [ myCategory, mySubCategory ],
+      //"makeShipments": bool.hasEnvironment(MakeShipmentsController.text),
     };
 
     await _firebaseService.updatePostData( data.id.toString(), postdata );

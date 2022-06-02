@@ -58,12 +58,6 @@ class Categories {
     storedCategories.add(cat);
   }
 
-  /*static Map<String, IconData> iconMapping = {
-    'facebook' : FontAwesomeIcons.facebook,
-    'twitter'  : FontAwesomeIcons.twitter,
-    'home'     : FontAwesomeIcons.home
-  };*/
-
   /// consumir esto en el HOME.
   static List<CategoryItemVo> homeCategories = categories.map((e) {
     final name = e['category'] as String;
