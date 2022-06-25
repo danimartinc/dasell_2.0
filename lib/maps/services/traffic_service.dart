@@ -53,8 +53,17 @@ class TrafficService {
     final resp = await _dioPlaces.get(url, queryParameters: {
       'limit': 1
     });
+    
+    print("URL: $url");
+     print("RESP CON DATA: ${ resp.data }");
 
-    final placesResponse = PlacesResponse.fromJson(resp.data);
+    final placesResponse = PlacesResponse.fromJson( resp.data );
+
+    //final respu=  Map<String, dynamic>.from(resp.data);
+
+    //final placesResponse = PlacesResponse.fromJson(respu.toString());
+
+    print("PLACES $placesResponse");
 
 
     return placesResponse.features[0];

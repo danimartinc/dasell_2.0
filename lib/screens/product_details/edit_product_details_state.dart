@@ -19,15 +19,19 @@ abstract class EditProductState extends State<EditProductDetails> {
   int current = 0;
 
 
-  final TextEditingController TitleController = TextEditingController();
-  final DescriptionController = TextEditingController();
-  final PriceController = TextEditingController();
-  final CategoryController = TextEditingController();
-  final MakeShipmentsController = TextEditingController();
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final priceController = TextEditingController();
+  final categoryController = TextEditingController();
+  final makeShipmentsController = TextEditingController();
 
   final double? containerHeight = 80;
   String? myCategory;
   String? mySubCategory;
+  double? sliderValue = 50.0;
+  var counterText = 0;
+  var isLogin = true;
+  bool makeShipments = true;
   
 
   @override
@@ -45,28 +49,30 @@ abstract class EditProductState extends State<EditProductDetails> {
 
     trace('JSON ${postModel.toJson()}');
 
-    TitleController.text = postModel.title!;
-    DescriptionController.text = postModel.description!;
-    PriceController.text = postModel.price.toString();
-    CategoryController.text = postModel.categories.toString();
+    titleController.text = postModel.title!;
+    descriptionController.text = postModel.description!;
+    priceController.text = postModel.price.toString();
+    categoryController.text = postModel.categories.toString();
+    makeShipmentsController.text = postModel.makeShipments.toString();
   }
 
   Future<void> updateData() async{
 
     Map<String,dynamic> postdata = {
-      "title": TitleController.text,
-      "description": DescriptionController.text,
-      "price": double.parse(PriceController.text),
+      "title": titleController.text,
+      "description": descriptionController.text,
+      "price": double.parse( priceController.text),
       "categories": [ myCategory, mySubCategory ],
-      //"makeShipments": bool.hasEnvironment(MakeShipmentsController.text),
+      "makeShipments": makeShipments
     };
 
-    await _firebaseService.updatePostData( data.id.toString(), postdata );
+    if( myCategory == null || mySubCategory == null) 
+    postdata.remove('categories');
 
+    await _firebaseService.updatePostData( data.id.toString(), postdata );
     print(data);
 
     Navigator.pop(context);
-
   }
 
 
@@ -110,11 +116,7 @@ abstract class EditProductState extends State<EditProductDetails> {
     '100': 'Nuevo',
   };
 
-  double? sliderValue = 50.0;
-  //var textController = TextEditingController();
-  var counterText = 0;
-  var isLogin = true;
-  bool makeShipments = true;
+
 
   void trySubmit() {
 

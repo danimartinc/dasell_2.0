@@ -20,7 +20,6 @@ class EditProduct {
     required this.id,
     required this.isFav,
     required this.isSold,
-    //required this.locationAddress,
     required this.latitude,
     required this.longitude,
     required this.makeShipments,
@@ -36,7 +35,6 @@ class EditProduct {
   int? id;
   bool? isFav;
   bool? isSold;
-  //String locationAddress;
   double? latitude;
   double? longitude;
   bool? makeShipments;
@@ -52,7 +50,6 @@ class EditProduct {
     id: json["id"],
     isFav: json["isFav"],
     isSold: json["isSold"],
-    //locationAddress: json["location address"],
     latitude: json["latitude"],
     longitude: json["longitude"],
     makeShipments: json["makeShipments"],
@@ -69,7 +66,6 @@ class EditProduct {
     "id": id,
     "isFav": isFav,
     "isSold": isSold,
-    //"location address": locationAddress,
     "latitude": latitude,
     "longitude": longitude,
     "makeShipments": makeShipments,

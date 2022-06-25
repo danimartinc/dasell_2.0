@@ -44,7 +44,7 @@ class _EditProductDetails extends EditProductState {
                     //InfoFormHeader(),
                     kGap20,
                     TextFormField(
-                      controller: TitleController,
+                      controller: titleController,
                       key: ValueKey('title'),
                       validator: (value) {
                         if ( value!.length > 8 ) {
@@ -70,7 +70,7 @@ class _EditProductDetails extends EditProductState {
                     kGap30,
                     //DescriptionFormField( onChanged: onDescriptionChanged,),    
                     TextFormField(
-                      controller: DescriptionController,
+                      controller: descriptionController,
                       key: ValueKey('desc'),
                       onChanged: (value) {
                         if ( prevValue.length > value.length) {
@@ -205,7 +205,7 @@ class _EditProductDetails extends EditProductState {
                       height: containerHeight,
                       child: TextField(
                         keyboardType: TextInputType.number,
-                        controller: PriceController,
+                        controller: priceController,
                         decoration: InputDecoration(
                           suffix: Text(
                             '€',
