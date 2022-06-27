@@ -42,7 +42,7 @@ class TrafficService {
       'limit' : 7
     });
 
-    final placesResponse = PlacesResponse.fromJson( resp.data );
+    final placesResponse = PlacesResponse.fromMap( resp.data );
 
     return placesResponse.features;
   }
@@ -57,7 +57,7 @@ class TrafficService {
     print("URL: $url");
      print("RESP CON DATA: ${ resp.data }");
 
-    final placesResponse = PlacesResponse.fromJson( resp.data );
+    final placesResponse = PlacesResponse.fromMap( resp.data );
 
     //final respu=  Map<String, dynamic>.from(resp.data);
 
